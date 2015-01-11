@@ -9,6 +9,7 @@ class WelcomeController < ApplicationController
 
     respond_to do |format|
       if signup_service.call(@signup)
+        sign_in User.last
         format.html { redirect_to team_path(current_user.team), notice: 'Signup successfull.' }
       else
         format.html { render root_path }
