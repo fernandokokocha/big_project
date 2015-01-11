@@ -1,0 +1,1 @@
+json.extract! @player, :id, :first_name, :last_name, :birthdate, :position, :salary, :reflex, :handling, :discipline, :tackling, :work_rate, :positioning, :creativity, :technique, :instinct, :shots, :condition, :created_at, :updated_at

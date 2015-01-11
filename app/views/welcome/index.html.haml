@@ -1,0 +1,11 @@
+%h1 Manager
+-if current_user
+  -if current_user.team
+    %p= link_to 'Your team', team_path(current_user.team)
+  -else
+    %p= link_to 'Create a team', new_team_path
+-else
+  %p
+    = link_to 'Sign in', new_user_session_path
+    or
+    = link_to 'Create account', new_user_registration_path

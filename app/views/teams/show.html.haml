@@ -1,0 +1,77 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @team.name
+%p
+  %b Balance:
+  = @team.balance
+
+%table
+  %tr
+    %th
+    %th
+    %th
+    %th
+    %th
+    %th
+    %th Mental
+    %th
+    %th
+    %th
+    %th
+    %th Technical
+    %th
+    %th
+    %th
+    %th
+    %th Physical
+    %th
+    %th
+    %th
+
+  %tr
+    %th First name
+    %th Last name
+    %th Birthdate
+    %th Age
+    %th Position
+    %th Salary
+    %th Reflex
+    %th Discipline
+    %th Work rate
+    %th Creativity
+    %th Instinct
+    %th Handling
+    %th Tackling
+    %th Positioning
+    %th Technique
+    %th Shots
+    %th Condition
+    %th
+
+  - @team.players.order(:position).each do |player|
+    %tr
+      %td= player.first_name
+      %td= player.last_name
+      %td= player.birthdate
+      %td= ((Date.today - player.birthdate)/365.25).to_i
+      %td= player.position
+      %td= player.salary
+      %td= player.reflex
+      %td= player.discipline
+      %td= player.work_rate
+      %td= player.creativity
+      %td= player.instinct
+      %td= player.handling
+      %td= player.tackling
+      %td= player.positioning
+      %td= player.technique
+      %td= player.shots
+      %td= player.condition
+      %td= link_to 'Show', player
+
+
+= link_to 'Edit', edit_team_path(@team)
+\|
+= link_to 'Back', teams_path
