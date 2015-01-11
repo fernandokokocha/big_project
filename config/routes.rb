@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'welcome#index'
+  post '/signup', :to=>"welcome#create", :as=>"signups"
   resources :players
   resources :teams
   devise_for :users

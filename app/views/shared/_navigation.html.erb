@@ -1,0 +1,33 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to 'Manager', root_path, :class => "navbar-brand" %>
+    </div>
+    <div>
+      <% if current_user %>
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to 'My team', team_path(current_user.team) %>
+        </li>
+        <li>
+          <%= link_to 'Teams', teams_path %>
+        </li>
+      </ul>
+      <% end %>
+
+      <% if current_user %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to 'Sign out', destroy_user_session_path, :method => "delete" %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to 'Sign in', new_user_session_path %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>

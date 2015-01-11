@@ -1,11 +1,35 @@
-%h1 Manager
--if current_user
-  -if current_user.team
-    %p= link_to 'Your team', team_path(current_user.team)
-  -else
-    %p= link_to 'Create a team', new_team_path
--else
-  %p
-    = link_to 'Sign in', new_user_session_path
-    or
-    = link_to 'Create account', new_user_registration_path
+%h1
+  Register for free!
+
+= form_for(@signup, :html => {:role => "form", :class => "form-horizontal"}) do |f|
+  - if @signup.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@signup.errors.count, "error")
+        prohibited this company from being saved:
+      %ul
+        - @signup.errors.full_messages.each do |message|
+          %li= message
+  .form-group.row
+    .col-md-4
+      = f.label :team_name, :class => "control-label"
+    .col-md-8
+      = f.text_field :team_name, :class => "form-control"
+  .form-group.row
+    .col-md-4
+      = f.label :email, :class => "control-label"
+    .col-md-8
+      = f.email_field :email, :class => "form-control"
+  .form-group.row
+    .col-md-4
+      = f.label :password, :class => "control-label"
+    .col-md-8
+      = f.password_field :password, :class => "form-control"
+  .form-group.row
+    .col-md-4
+      = f.label :password_confirmation, :class => "control-label"
+    .col-md-8
+      = f.password_field :password_confirmation, :class => "form-control"
+  .form-group.row
+    .col-sm-offset-2.col-md-6
+      = f.submit "Signup", :class => "btn-lg"
