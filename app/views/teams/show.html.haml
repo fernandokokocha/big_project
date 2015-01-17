@@ -6,25 +6,26 @@
   %b Balance:
   = @team.balance
 
-%table.table.table-striped.table-bordered.table-hover.table-condensed
-  %tr
-    %th First name
-    %th Last name
-    %th Birthdate
-    %th Age
-    %th Position
-    %th Salary
-    %th
-
-  - @team.players.order(:position).each do |player|
+%p
+  %table.table.table-striped.table-bordered.table-hover.table-condensed
     %tr
-      %td= player.first_name
-      %td= player.last_name
-      %td= player.birthdate
-      %td= ((Date.today - player.birthdate)/365.25).to_i
-      %td= player.position
-      %td= player.salary
-      %td= link_to 'Show', player
+      %th First name
+      %th Last name
+      %th Birthdate
+      %th Age
+      %th Position
+      %th Salary
+      %th
+
+    - @team.players.order(:position).each do |player|
+      %tr
+        %td= player.first_name
+        %td= player.last_name
+        %td= player.birthdate
+        %td= ((Date.today - player.birthdate)/365.25).to_i
+        %td= player.position
+        %td= player.salary
+        %td= link_to 'Show', player
 
 
 = link_to 'Edit', edit_team_path(@team)

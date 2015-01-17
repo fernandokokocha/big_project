@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
         sign_in User.last
         format.html { redirect_to team_path(current_user.team), notice: 'Signup successfull.' }
       else
-        format.html { render root_path }
+        format.html { render :index }
       end
     end
   end

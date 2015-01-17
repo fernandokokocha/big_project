@@ -1,53 +1,79 @@
 %p#notice= notice
 
-%p
-  %b First name:
+%h2
+  %i.glyphicon.glyphicon-user
   = @player.first_name
-%p
-  %b Last name:
   = @player.last_name
+
 %p
-  %b Birthdate:
-  = @player.birthdate
+  %i.glyphicon.glyphicon-star
+  %b Team:
+  = @player.team.name
 %p
+  %i.glyphicon.glyphicon-asterisk
   %b Position:
   = @player.position
 %p
+  %i.glyphicon.glyphicon-minus
+  %b Birthdate:
+  = @player.birthdate
+  (
+  = ((Date.today - @player.birthdate)/365.25).to_i
+  years old
+  )
+%p
+  %i.glyphicon.glyphicon-usd
   %b Salary:
   = @player.salary
+
 %p
-  %b Reflex:
-  = @player.reflex
-%p
-  %b Handling:
-  = @player.handling
-%p
-  %b Discipline:
-  = @player.discipline
-%p
-  %b Tackling:
-  = @player.tackling
-%p
-  %b Work rate:
-  = @player.work_rate
-%p
-  %b Positioning:
-  = @player.positioning
-%p
-  %b Creativity:
-  = @player.creativity
-%p
-  %b Technique:
-  = @player.technique
-%p
-  %b Instinct:
-  = @player.instinct
-%p
-  %b Shots:
-  = @player.shots
-%p
-  %b Condition:
-  = @player.condition
+  %i.glyphicon.glyphicon-star-empty
+  %b Skills:
+  %table.table.table-bordered.table-condensed
+    %tr
+      %th Technical
+      %th
+      %th Mental
+      %th
+      %th Physical
+      %th
+
+    %tr
+      %td Reflex
+      %td= @player.reflex
+      %td Handling
+      %td= @player.handling
+      %td Condition
+      %td= @player.condition
+    %tr
+      %td Discipline
+      %td= @player.discipline
+      %td Tackling
+      %td= @player.tackling
+      %td
+      %td
+    %tr
+      %td Work rate
+      %td= @player.work_rate
+      %td Positioning
+      %td= @player.positioning
+      %td
+      %td
+    %tr
+      %td Creativity
+      %td= @player.creativity
+      %td Technique
+      %td= @player.technique
+      %td
+      %td
+    %tr
+      %td Instinct
+      %td= @player.instinct
+      %td Shots
+      %td= @player.shots
+      %td
+      %td
+
 
 = link_to 'Edit', edit_player_path(@player)
 \|
