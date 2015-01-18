@@ -9,7 +9,8 @@ class SignupService
 
       @team = Team.create!(name: form_object.team_name,
                    user: user,
-                   balance: 10**9)
+                   balance: 10**9,
+                   logo: logo)
 
       2.times {generate_gk}
       8.times {generate_d}

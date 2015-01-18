@@ -11,25 +11,25 @@
         - @signup.errors.full_messages.each do |message|
           %li= message
   .form-group.row
-    .col-md-4
+    .col-md-3
       = f.label :email, :class => "control-label"
-    .col-md-8
+    .col-md-4
       = f.email_field :email, :class => "form-control"
   .form-group.row
-    .col-md-4
+    .col-md-3
       = f.label :password, :class => "control-label"
-    .col-md-8
+    .col-md-4
       = f.password_field :password, :class => "form-control"
   .form-group.row
-    .col-md-4
+    .col-md-3
       = f.label :password_confirmation, :class => "control-label"
-    .col-md-8
+    .col-md-4
       = f.password_field :password_confirmation, :class => "form-control"
   .form-group.row
-    .col-md-4
+    .col-md-3
       = f.label :team_name, :class => "control-label"
-    .col-md-8
+    .col-md-4
       = f.text_field :team_name, :class => "form-control"
   .form-group.row
-    .col-sm-offset-2.col-md-6
+    .col-md-2
       = f.submit "Signup", :class => "btn-lg"

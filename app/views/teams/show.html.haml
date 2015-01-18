@@ -1,7 +1,34 @@
 %p#notice= notice
 
+%p
+  -if @team.logo
+    =image_tag @team.logo
+  -else
+    =image_tag "default_logo.jpg"
+
+%p
+  = form_for @team, :url => team_path(@team), :method => :patch do |f|
+    - if @team.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@team.errors.count, "error")} prohibited this logo from being saved:"
+        %ul
+          - @team.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      = f.label :logo
+      = f.file_field :logo
+    .actions
+      = f.submit 'Upload'
+
+
+%p
+  @team.logo:
+  =@team.logo
+
 %h1
   = @team.name
+
 %p
   %b Balance:
   = @team.balance

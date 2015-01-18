@@ -22,7 +22,6 @@ class TeamsController < ApplicationController
   end
 
   def create
-
     respond_with(@team)
   end
 
@@ -42,6 +41,6 @@ class TeamsController < ApplicationController
     end
 
     def team_params
-      params.require(:team).permit(:name, :balance)
+      params.require(:team).permit(:name, :balance, :logo)
     end
 end
