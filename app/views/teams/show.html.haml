@@ -41,29 +41,67 @@
   %b Players
   %table.table.table-striped.table-bordered.table-hover.table-condensed
     %tr
-      %th First name
-      %th Last name
+      %th Name
       %th Birthdate
       %th Age
       %th Position
+      %th Position power
+      %th Tactic
       %th Salary
-      %th
 
     - @team.players.each do |player|
       %tr
-        %td= player.first_name
-        %td= player.last_name
+        %td= link_to player.full_name, player
         %td= player.birthdate
         %td= player.current_age
         %td= player.position.name
+        %td= player.position_power
+        %td
+          -if @team.tactic.include? player
+            %i.glyphicon.glyphicon-ok
         %td= player.salary
-        %td= link_to 'Show', player
 
 -if @team.user == current_user
   %p
     %i.glyphicon.glyphicon-fullscreen
     %b Tactic:
-    
+    = form_for @team.tactic, :url => tactic_path(@team.tactic), :method => :patch do |f|
+      .field
+        = f.label :gk
+        = f.collection_select(:gk, @team.players, :id, :full_name)
+      .field
+        = f.label :d1
+        = f.collection_select(:d1, @team.players, :id, :full_name)
+      .field
+        = f.label :d2
+        = f.collection_select(:d2, @team.players, :id, :full_name)
+      .field
+        = f.label :d3
+        = f.collection_select(:d3, @team.players, :id, :full_name)
+      .field
+        = f.label :d4
+        = f.collection_select(:d4, @team.players, :id, :full_name)
+      .field
+        = f.label :dm1
+        = f.collection_select(:dm1, @team.players, :id, :full_name)
+      .field
+        = f.label :dm2
+        = f.collection_select(:dm2, @team.players, :id, :full_name)
+      .field
+        = f.label :am1
+        = f.collection_select(:am1, @team.players, :id, :full_name)
+      .field
+        = f.label :am2
+        = f.collection_select(:am2, @team.players, :id, :full_name)
+      .field
+        = f.label :s1
+        = f.collection_select(:s1, @team.players, :id, :full_name)
+      .field
+        = f.label :s2
+        = f.collection_select(:s2, @team.players, :id, :full_name)
+      .actions
+        = f.submit 'Upload'
+
 
 = link_to 'Edit', edit_team_path(@team)
 \|
