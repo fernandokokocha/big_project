@@ -21,10 +21,10 @@
 %h1
   = @team.name
 
-%p
-  %b
+-if @team.user == current_user
+  %p
     %i.glyphicon.glyphicon-usd
-    Balance:
+    %b Balance:
     = @team.balance
 
 %p
@@ -59,6 +59,11 @@
         %td= player.salary
         %td= link_to 'Show', player
 
+-if @team.user == current_user
+  %p
+    %i.glyphicon.glyphicon-fullscreen
+    %b Tactic:
+    
 
 = link_to 'Edit', edit_team_path(@team)
 \|

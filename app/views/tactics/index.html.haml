@@ -1,0 +1,39 @@
+%h1 Listing tactics
+
+%table
+  %tr
+    %th Gk
+    %th D1
+    %th D2
+    %th D3
+    %th D4
+    %th Dm1
+    %th Dm2
+    %th Am1
+    %th Am2
+    %th S1
+    %th S2
+    %th
+    %th
+    %th
+
+  - @tactics.each do |tactic|
+    %tr
+      %td= tactic.gk
+      %td= tactic.d1
+      %td= tactic.d2
+      %td= tactic.d3
+      %td= tactic.d4
+      %td= tactic.dm1
+      %td= tactic.dm2
+      %td= tactic.am1
+      %td= tactic.am2
+      %td= tactic.s1
+      %td= tactic.s2
+      %td= link_to 'Show', tactic
+      %td= link_to 'Edit', edit_tactic_path(tactic)
+      %td= link_to 'Destroy', tactic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tactic', new_tactic_path
