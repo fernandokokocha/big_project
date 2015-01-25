@@ -64,43 +64,39 @@
 -if @team.user == current_user
   %p
     %i.glyphicon.glyphicon-fullscreen
-    %b Tactic:
-    = form_for @team.tactic, :url => tactic_path(@team.tactic), :method => :patch do |f|
-      .field
-        = f.label :gk
-        = f.collection_select(:gk, @team.players, :id, :full_name)
-      .field
-        = f.label :d1
-        = f.collection_select(:d1, @team.players, :id, :full_name)
-      .field
-        = f.label :d2
-        = f.collection_select(:d2, @team.players, :id, :full_name)
-      .field
-        = f.label :d3
-        = f.collection_select(:d3, @team.players, :id, :full_name)
-      .field
-        = f.label :d4
-        = f.collection_select(:d4, @team.players, :id, :full_name)
-      .field
-        = f.label :dm1
-        = f.collection_select(:dm1, @team.players, :id, :full_name)
-      .field
-        = f.label :dm2
-        = f.collection_select(:dm2, @team.players, :id, :full_name)
-      .field
-        = f.label :am1
-        = f.collection_select(:am1, @team.players, :id, :full_name)
-      .field
-        = f.label :am2
-        = f.collection_select(:am2, @team.players, :id, :full_name)
-      .field
-        = f.label :s1
-        = f.collection_select(:s1, @team.players, :id, :full_name)
-      .field
-        = f.label :s2
-        = f.collection_select(:s2, @team.players, :id, :full_name)
-      .actions
-        = f.submit 'Upload'
+    %b
+      Tactic:
+      .pitch_background
+        = form_for @team.tactic, :url => tactic_path(@team.tactic), :method => :patch do |f|
+          .row.big-vertical-padding
+            .col-md-3.col-md-offset-3
+              = f.collection_select(:s1, @team.players, :id, :full_name)
+            .col-md-6
+              = f.collection_select(:s2, @team.players, :id, :full_name)
+          .row.big-vertical-padding
+            .col-md-3
+              = f.collection_select(:am1, @team.players, :id, :full_name)
+            .col-md-3.col-md-offset-6
+              = f.collection_select(:am2, @team.players, :id, :full_name)
+          .row.big-vertical-padding
+            .col-md-3.col-md-offset-3
+              = f.collection_select(:dm1, @team.players, :id, :full_name)
+            .col-md-6
+              = f.collection_select(:dm2, @team.players, :id, :full_name)
+          .row.big-vertical-padding
+            .col-md-3
+              = f.collection_select(:d1, @team.players, :id, :full_name)
+            .col-md-3
+              = f.collection_select(:d2, @team.players, :id, :full_name)
+            .col-md-3
+              = f.collection_select(:d3, @team.players, :id, :full_name)
+            .col-md-3
+              = f.collection_select(:d4, @team.players, :id, :full_name)
+          .row.big-vertical-padding
+            .col-md-6.col-md-offset-5
+              = f.collection_select(:gk, @team.players, :id, :full_name)
+          .actions
+            = f.submit 'Save'
 
 
 = link_to 'Edit', edit_team_path(@team)
