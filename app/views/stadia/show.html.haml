@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @stadium.name
+%p
+  %b Capacity:
+  = @stadium.capacity
+%p
+  %b Roof:
+  = @stadium.roof
+
+= link_to 'Edit', edit_stadium_path(@stadium)
+\|
+= link_to 'Back', stadia_path

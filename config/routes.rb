@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :stadia
+
+  resources :positions
+
   root to: 'welcome#index'
   post '/signup', :to=>"welcome#create", :as=>"signups"
   resources :players

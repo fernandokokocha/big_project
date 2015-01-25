@@ -1,12 +1,10 @@
 %p#notice= notice
 
 %p
-  -if @team.logo
-    =image_tag @team.logo
-  -else
-    =image_tag "default_logo.jpg"
+  =image_tag @team.logo
 
 %p
+  %b Change logo
   = form_for @team, :url => team_path(@team), :method => :patch do |f|
     - if @team.errors.any?
       #error_explanation
@@ -16,24 +14,31 @@
             %li= msg
 
     .field
-      = f.label :logo
       = f.file_field :logo
     .actions
       = f.submit 'Upload'
-
-
-%p
-  @team.logo:
-  =@team.logo
 
 %h1
   = @team.name
 
 %p
-  %b Balance:
-  = @team.balance
+  %b
+    %i.glyphicon.glyphicon-usd
+    Balance:
+    = @team.balance
 
 %p
+  %i.glyphicon.glyphicon-home
+  %b Stadium:
+  =@team.stadium.name
+  %b Capacity:
+  =@team.stadium.capacity
+  %b Roof:
+  =@team.stadium.roof
+
+%p
+  %i.glyphicon.glyphicon-user
+  %b Players
   %table.table.table-striped.table-bordered.table-hover.table-condensed
     %tr
       %th First name
@@ -44,13 +49,13 @@
       %th Salary
       %th
 
-    - @team.players.order(:position).each do |player|
+    - @team.players.each do |player|
       %tr
         %td= player.first_name
         %td= player.last_name
         %td= player.birthdate
-        %td= ((Date.today - player.birthdate)/365.25).to_i
-        %td= player.position
+        %td= player.current_age
+        %td= player.position.name
         %td= player.salary
         %td= link_to 'Show', player
 

@@ -12,13 +12,13 @@
 %p
   %i.glyphicon.glyphicon-asterisk
   %b Position:
-  = @player.position
+  = @player.position.name
 %p
   %i.glyphicon.glyphicon-minus
   %b Birthdate:
   = @player.birthdate
   (
-  = ((Date.today - @player.birthdate)/365.25).to_i
+  = @player.current_age
   years old
   )
 %p

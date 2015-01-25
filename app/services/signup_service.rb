@@ -7,10 +7,17 @@ class SignupService
                           password: form_object.password,
                           password_confirmation: form_object.password_confirmation)
 
+      stadium = Stadium.create!(name: form_object.team_name + " Arena",
+                                capacity: 10000,
+                                roof: false)
+
       @team = Team.create!(name: form_object.team_name,
                    user: user,
                    balance: 10**9,
-                   logo: logo)
+                   stadium: stadium)
+
+      @team.logo = File.open(File.open(File.join(Rails.root, 'app/assets/images/default_logo.jpg')))
+      @team.save
 
       2.times {generate_gk}
       8.times {generate_d}
@@ -55,7 +62,7 @@ class SignupService
 
   def generate_gk
     player = generate_player
-    player.position = "GK"
+    player.position = Position.find_by_name("GK")
     player.reflex += 10
     player.handling += 10
     player.save
@@ -63,7 +70,7 @@ class SignupService
 
   def generate_d
     player = generate_player
-    player.position = "D"
+    player.position = Position.find_by_name("D")
     player.discipline += 10
     player.tackling += 10
     player.save
@@ -71,7 +78,7 @@ class SignupService
 
   def generate_dm
     player = generate_player
-    player.position = "DM"
+    player.position = Position.find_by_name("DM")
     player.work_rate += 10
     player.positioning += 10
     player.save
@@ -79,7 +86,7 @@ class SignupService
 
   def generate_am
     player = generate_player
-    player.position = "AM"
+    player.position = Position.find_by_name("AM")
     player.creativity += 10
     player.technique += 10
     player.save
@@ -87,7 +94,7 @@ class SignupService
 
   def generate_s
     player = generate_player
-    player.position = "S"
+    player.position = Position.find_by_name("S")
     player.instinct += 10
     player.shots += 10
     player.save
