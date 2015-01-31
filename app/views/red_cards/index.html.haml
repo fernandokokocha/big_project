@@ -1,0 +1,17 @@
+%h1 Listing red_cards
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @red_cards.each do |red_card|
+    %tr
+      %td= link_to 'Show', red_card
+      %td= link_to 'Edit', edit_red_card_path(red_card)
+      %td= link_to 'Destroy', red_card, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Red card', new_red_card_path

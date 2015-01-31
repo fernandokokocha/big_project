@@ -1,0 +1,10 @@
+= form_for @yellow_card do |f|
+  - if @yellow_card.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@yellow_card.errors.count, "error")} prohibited this yellow_card from being saved:"
+      %ul
+        - @yellow_card.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

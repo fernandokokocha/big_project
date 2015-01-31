@@ -1,0 +1,2 @@
+module YellowCardsHelper
+end

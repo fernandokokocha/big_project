@@ -1,0 +1,17 @@
+%h1 Listing assists
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @assists.each do |assist|
+    %tr
+      %td= link_to 'Show', assist
+      %td= link_to 'Edit', edit_assist_path(assist)
+      %td= link_to 'Destroy', assist, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Assist', new_assist_path
