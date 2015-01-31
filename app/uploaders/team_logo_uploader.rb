@@ -18,6 +18,10 @@ class TeamLogoUploader < CarrierWave::Uploader::Base
     "default_logo.jpg"
   end
 
+  def default_thumb_url
+    "default_logo_thumb.jpg"
+  end
+
   def extension_white_list
     %w(jpg jpeg gif png)
   end

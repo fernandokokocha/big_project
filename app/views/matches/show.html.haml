@@ -1,17 +1,37 @@
 %p#notice= notice
 
 %p
-  %b Home score:
-  = @match.home_score
-%p
-  %b Away score:
-  = @match.away_score
-%p
-  %b Date:
-  = @match.date
-%p
+  %h3
+    = succeed ',' do
+      =@match.date
+    = @match.home.stadium.name
   %b Attendance:
   = @match.attendance
+
+%p
+  %h2
+    .row
+      .col-md-5
+        = @match.home.name
+      .col-md-2
+      .col-md-5
+        = @match.away.name
+  .row
+    .col-md-5
+      -if @match.home.logo.present?
+        =image_tag @match.home.logo.thumb
+      -else
+        =image_tag @match.home.logo.default_thumb_url
+    .col-md-2.score
+      = @match.home_score
+      = '-'
+      = @match.away_score
+    .col-md-5
+      -if @match.away.logo.present?
+        =image_tag @match.away.logo.thumb
+      -else
+        =image_tag @match.away.logo.default_thumb_url
+
 %p
   %b Report:
   = raw @match.report

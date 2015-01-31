@@ -42,9 +42,8 @@ class GenerateMatch
           situation = assister.full_name + " swietnie podaje, ale " + shoter.full_name + " partaczy jego wysilek"
         end
       end
-      @match.report += situation + "\n"
+      @match.report += situation + "<br />"
     end
-
 
     away_situations = (away_op - home_dp) / 1000
     away_situations.times do
@@ -64,7 +63,7 @@ class GenerateMatch
           situation = assister.full_name + " swietnie podaje, ale " + shoter.full_name + " partaczy jego wysilek"
         end
       end
-      @match.report += situation + "\n"
+      @match.report += situation + "<br />"
     end
 
     @match.save
