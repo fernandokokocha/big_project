@@ -1,7 +1,10 @@
 %p#notice= notice
 
 %p
-  =image_tag @team.logo
+  -if @team.logo.present?
+    =image_tag @team.logo
+  -else
+    =image_tag @team.logo.default_url
 
 %p
   %b Change logo

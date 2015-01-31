@@ -17,9 +17,6 @@ class SignupService
                            reputation: 100,
                            stadium: stadium)
 
-      @team.logo = File.open(File.open(File.join(Rails.root, 'app/assets/images/default_logo.jpg')))
-      @team.save
-
       2.times {generate_gk}
       8.times {generate_d}
       4.times {generate_dm}
