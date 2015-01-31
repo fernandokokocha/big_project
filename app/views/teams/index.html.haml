@@ -5,6 +5,8 @@
     %th Name
     %th Balance
     %th User
+    %th DP
+    %th OP
     %th
     %th
     %th
@@ -14,6 +16,8 @@
       %td= team.name
       %td= team.balance
       %td= team.user.email
+      %td= team.defensive_power
+      %td= team.offensive_power
       %td= link_to 'Show', team
       %td= link_to 'Edit', edit_team_path(team)
       %td= link_to 'Destroy', team, :method => :delete, :data => { :confirm => 'Are you sure?' }

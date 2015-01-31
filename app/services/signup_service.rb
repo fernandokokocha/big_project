@@ -12,9 +12,10 @@ class SignupService
                                 roof: false)
 
       @team = Team.create!(name: form_object.team_name,
-                   user: user,
-                   balance: 10**9,
-                   stadium: stadium)
+                           user: user,
+                           balance: 10**9,
+                           reputation: 100,
+                           stadium: stadium)
 
       @team.logo = File.open(File.open(File.join(Rails.root, 'app/assets/images/default_logo.jpg')))
       @team.save
@@ -76,17 +77,17 @@ class SignupService
     player.last_name = Faker::Name.last_name
     player.birthdate = Faker::Date.between(Date.today - 30.years, Date.today - 18.years)
     player.salary = 10000
-    player.reflex = 1 + rand(10)
-    player.handling = 1 + rand(10)
-    player.discipline = 1 + rand(10)
-    player.tackling = 1 + rand(10)
-    player.work_rate = 1 + rand(10)
-    player.positioning = 1 + rand(10)
-    player.creativity = 1 + rand(10)
-    player.technique = 1 + rand(10)
-    player.instinct = 1 + rand(10)
-    player.shots = 1 + rand(10)
-    player.condition = 1 + rand(20)
+    player.reflex = 100 + rand(1000)
+    player.handling = 100 + rand(1000)
+    player.discipline = 100 + rand(1000)
+    player.tackling = 100 + rand(1000)
+    player.work_rate = 100 + rand(1000)
+    player.positioning = 100 + rand(1000)
+    player.creativity = 100 + rand(1000)
+    player.technique = 100 + rand(1000)
+    player.instinct = 100 + rand(1000)
+    player.shots = 100 + rand(1000)
+    player.condition = 100 + rand(2000)
 
     player
   end
@@ -94,40 +95,40 @@ class SignupService
   def generate_gk
     player = generate_player
     player.position = Position.find_by_name("GK")
-    player.reflex += 10
-    player.handling += 10
+    player.reflex += 1000
+    player.handling += 1000
     player.save
   end
 
   def generate_d
     player = generate_player
     player.position = Position.find_by_name("D")
-    player.discipline += 10
-    player.tackling += 10
+    player.discipline += 1000
+    player.tackling += 1000
     player.save
   end
 
   def generate_dm
     player = generate_player
     player.position = Position.find_by_name("DM")
-    player.work_rate += 10
-    player.positioning += 10
+    player.work_rate += 1000
+    player.positioning += 1000
     player.save
   end
 
   def generate_am
     player = generate_player
     player.position = Position.find_by_name("AM")
-    player.creativity += 10
-    player.technique += 10
+    player.creativity += 1000
+    player.technique += 1000
     player.save
   end
 
   def generate_s
     player = generate_player
     player.position = Position.find_by_name("S")
-    player.instinct += 10
-    player.shots += 10
+    player.instinct += 1000
+    player.shots += 1000
     player.save
   end
 end

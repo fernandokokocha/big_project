@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125174103) do
+ActiveRecord::Schema.define(version: 20150126191429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 20150125174103) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+
+  create_table "matches", force: true do |t|
+    t.integer  "home_score"
+    t.integer  "away_score"
+    t.date     "date"
+    t.integer  "attendance"
+    t.text     "report"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "home_id"
+    t.integer  "away_id"
+  end
 
   create_table "players", force: true do |t|
     t.string   "first_name"
@@ -131,6 +143,7 @@ ActiveRecord::Schema.define(version: 20150125174103) do
     t.string   "logo"
     t.integer  "stadium_id"
     t.integer  "tactic_id"
+    t.integer  "reputation"
   end
 
   create_table "users", force: true do |t|
