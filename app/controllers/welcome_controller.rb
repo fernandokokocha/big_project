@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    redirect_to team_path(current_user.team) if current_user
+    redirect_to my_team_path if current_user
     @signup = Signup.new
   end
 
@@ -10,11 +10,15 @@ class WelcomeController < ApplicationController
     respond_to do |format|
       if signup_service.call(@signup)
         sign_in User.last
-        format.html { redirect_to team_path(current_user.team), notice: 'Signup successfull.' }
+        format.html { redirect_to my_team_path, notice: 'Signup successfull.' }
       else
         format.html { render :index }
       end
     end
+  end
+
+  def my_team
+    @team = Team.find(current_user.team.id)
   end
 
   private

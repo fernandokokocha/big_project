@@ -6,13 +6,13 @@
     <div>
       <% if current_user %>
       <ul class="nav navbar-nav">
-        <li>
+        <li id="my-team-tab">
           <%= link_to 'My team', team_path(current_user.team) %>
         </li>
-        <li>
+        <li id="teams-tab">
           <%= link_to 'Teams', teams_path %>
         </li>
-        <li>
+        <li id="new-match-tab">
           <%= link_to 'New match', new_match_path %>
         </li>
       </ul>
