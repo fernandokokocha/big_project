@@ -3,6 +3,7 @@ class Tactic < ActiveRecord::Base
 
   def include? player
     attributes.each do |key, value|
+      next if key == "id"
       return true if value == player.id
     end
     false
