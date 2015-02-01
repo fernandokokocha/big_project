@@ -4,10 +4,15 @@ class TeamLogoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :file
+
   process :resize_to_fit => [200, 200]
 
   version :thumb do
     process :resize_to_fit => [100, 100]
+  end
+
+  version :micro do
+    process :resize_to_fit => [30, 30]
   end
 
   def store_dir
@@ -20,6 +25,10 @@ class TeamLogoUploader < CarrierWave::Uploader::Base
 
   def default_thumb_url
     "default_logo_thumb.jpg"
+  end
+
+  def default_micro_url
+    "default_logo_micro.jpg"
   end
 
   def extension_white_list

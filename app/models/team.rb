@@ -37,4 +37,28 @@ class Team < ActiveRecord::Base
         Player.find(tactic.s1).s_power * 1.8 +
         Player.find(tactic.s2).s_power * 1.8).to_i
   end
+
+  def logo_path
+    if logo.present?
+      logo
+    else
+      logo.default_url
+    end
+  end
+
+  def logo_thumb_path
+    if logo.present?
+      logo.thumb
+    else
+      logo.default_thumb_url
+    end
+  end
+
+  def logo_micro_path
+    if logo.present?
+      logo.micro
+    else
+      logo.default_micro_url
+    end
+  end
 end

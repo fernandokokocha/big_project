@@ -17,10 +17,9 @@
   %i.glyphicon.glyphicon-minus
   %b Birthdate:
   = @player.birthdate
-  (
-  = @player.current_age
-  years old
-  )
+  = surround '(', ')' do
+    = @player.current_age
+    years old
 %p
   %i.glyphicon.glyphicon-usd
   %b Salary:

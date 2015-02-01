@@ -36,11 +36,17 @@
   %b Report:
   %table.table.table-bordered.table-condensed
     %tr
+      %th Team
       %th Minute
       %th Event
 
     - @match.match_events.order(:time).each do |event|
       %tr
+        %td
+          -if event.first_player.team == @match.home
+            =image_tag @match.home.logo_micro_path
+          -else
+            =image_tag @match.away.logo_micro_path
         %td= event.time
         %td= event.description
 

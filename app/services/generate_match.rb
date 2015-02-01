@@ -25,11 +25,44 @@ class GenerateMatch
     generate_home_goals!
     generate_away_goals!
     generate_injuries!
+    generate_cards!
+  end
+  
+  def generate_home_goals!
+    goalkeeper = Player.find(@match.away.tactic.gk)
+    home_situations.times do
+      shooter = Player.find(pick_shooter @match.home)
+      assistant = Player.find(pick_assistant @match.home)
+      if goal? shooter, goalkeeper
+        if shooter == assistant
+          generate_solo_goal!(shooter)
+        else
+          generate_goal!(shooter, assistant)
+        end
+        @match.home_score += 1
+      end
+    end
+  end
+  
+  def generate_away_goals!
+    goalkeeper = Player.find(@match.home.tactic.gk)
+    away_situations.times do
+      shooter = Player.find(pick_shooter @match.away)
+      assistant = Player.find(pick_assistant @match.away)
+      if goal? shooter, goalkeeper
+        if shooter == assistant
+          generate_solo_goal!(shooter)
+        else
+          generate_goal!(shooter, assistant)
+        end
+        @match.away_score += 1
+      end
+    end
   end
 
   def generate_injuries!
     players = @match.home.tactic.all_players + @match.away.tactic.all_players
-    for player in players do
+    players.each do |player|
       susceptibility = 3000 - player.condition
       r = rand(20000)
       if r < susceptibility
@@ -47,35 +80,27 @@ class GenerateMatch
     end
   end
 
-  def generate_away_goals!
-    goalkeeper = Player.find(@match.home.tactic.gk)
-    away_situations.times do
-      shooter = Player.find(pick_shooter @match.away)
-      assistant = Player.find(pick_assistant @match.away)
-      if goal? shooter, goalkeeper
-        if shooter == assistant
-          generate_solo_goal!(shooter)
-        else
-          generate_goal!(shooter, assistant)
-        end
-        @match.away_score += 1
-      end
+  def generate_cards!
+    players = @match.home.tactic.all_players + @match.away.tactic.all_players
+    players.each do |player|
+      generate_yellow_card! player
     end
   end
 
-  def generate_home_goals!
-    goalkeeper = Player.find(@match.away.tactic.gk)
-    home_situations.times do
-      shooter = Player.find(pick_shooter @match.home)
-      assistant = Player.find(pick_assistant @match.home)
-      if goal? shooter, goalkeeper
-        if shooter == assistant
-          generate_solo_goal!(shooter)
-        else
-          generate_goal!(shooter, assistant)
-        end
-        @match.home_score += 1
-      end
+  def generate_yellow_card!(player)
+    susceptibility = 3000 - player.d_power
+    r = rand(10000)
+    if r < susceptibility
+      event = MatchEvent.new
+      event.event_type = "yellow card"
+      event.match = @match
+      event.time = rand(1..90)
+      desc = YellowCardDescription.order("RANDOM()").first
+      desc = desc.description
+      desc = desc.sub("X", player.full_name)
+      event.description = desc
+      event.first_player = player
+      event.save
     end
   end
 

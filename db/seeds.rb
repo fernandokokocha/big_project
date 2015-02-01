@@ -12,11 +12,15 @@ Position.create(:name => "DM", :value => 3)
 Position.create(:name => "AM", :value => 4)
 Position.create(:name => "S", :value => 5)
 
-GoalDescription.create(:description => "Y podaje, X wykancza, gol!")
-GoalDescription.create(:description => "X strzela gola, podawal Y.")
+GoalDescription.create(:description => "Y podaje, X wykańcza, gol!")
+GoalDescription.create(:description => "X strzela gola, podawał Y.")
 
-SoloGoalDescription.create(:description => "X strzela gola po bledzie obroncy.")
-SoloGoalDescription.create(:description => "X samotnie przedarl sie przez obrone rywala i gol!")
+SoloGoalDescription.create(:description => "X strzela gola po błędzie obrońcy.")
+SoloGoalDescription.create(:description => "X samotnie przedarł sie przez obronę rywala i gol!")
 
-InjuryDescription.create(:description => "Paskudna kontuzja. X uderzyl glowa w slupek i odpadla mu glowa.")
+InjuryDescription.create(:description => "Paskudna kontuzja. X uderzył głową w słupek i odpadła mu głowa.")
 InjuryDescription.create(:description => "Przeciwnik gra bardzo ostro! X zostaje zniesiony z boiska z powodu kontuzji.")
+
+YellowCardDescription.create(:description => "X dostaje żółtą kartkę za ostry wślizg.")
+YellowCardDescription.create(:description => "X dostaje żółtą kartkę za dyskusje z sędziami.")
+YellowCardDescription.create(:description => "X dostaje żółtą kartkę za zagranie ręką.")

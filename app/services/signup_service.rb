@@ -17,11 +17,11 @@ class SignupService
                            reputation: 100,
                            stadium: stadium)
 
-      2.times {generate_gk}
-      8.times {generate_d}
-      4.times {generate_dm}
-      4.times {generate_am}
-      4.times {generate_s}
+      2.times {generate_gk!}
+      8.times {generate_d!}
+      4.times {generate_dm!}
+      4.times {generate_am!}
+      4.times {generate_s!}
 
       initial_tactic!
     end
@@ -89,7 +89,7 @@ class SignupService
     player
   end
 
-  def generate_gk
+  def generate_gk!
     player = generate_player
     player.position = Position.find_by_name("GK")
     player.reflex += 1000
@@ -97,7 +97,7 @@ class SignupService
     player.save
   end
 
-  def generate_d
+  def generate_d!
     player = generate_player
     player.position = Position.find_by_name("D")
     player.discipline += 1000
@@ -105,7 +105,7 @@ class SignupService
     player.save
   end
 
-  def generate_dm
+  def generate_dm!
     player = generate_player
     player.position = Position.find_by_name("DM")
     player.work_rate += 1000
@@ -113,7 +113,7 @@ class SignupService
     player.save
   end
 
-  def generate_am
+  def generate_am!
     player = generate_player
     player.position = Position.find_by_name("AM")
     player.creativity += 1000
@@ -121,7 +121,7 @@ class SignupService
     player.save
   end
 
-  def generate_s
+  def generate_s!
     player = generate_player
     player.position = Position.find_by_name("S")
     player.instinct += 1000
