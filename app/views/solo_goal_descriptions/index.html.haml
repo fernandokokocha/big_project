@@ -1,0 +1,19 @@
+%h1 Listing solo_goal_descriptions
+
+%table
+  %tr
+    %th Description
+    %th
+    %th
+    %th
+
+  - @solo_goal_descriptions.each do |solo_goal_description|
+    %tr
+      %td= solo_goal_description.description
+      %td= link_to 'Show', solo_goal_description
+      %td= link_to 'Edit', edit_solo_goal_description_path(solo_goal_description)
+      %td= link_to 'Destroy', solo_goal_description, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Solo goal description', new_solo_goal_description_path

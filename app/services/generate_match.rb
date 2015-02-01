@@ -9,74 +9,165 @@ class GenerateMatch
       @match.away = away
       @match.date = Date.today
       @match.attendance = calculate_attendance
-      generate_report!
+      @match.home_score = 0
+      @match.away_score = 0
+      generate_match_events!
       @match.save
     end
 
     form_object
   end
 
-  def generate_report!
-    @match.home_score = 0
-    @match.away_score = 0
-    @match.report = ""
-    home_dp = @match.home.defensive_power
-    home_op = @match.home.offensive_power
-    away_dp = @match.away.defensive_power
-    away_op = @match.away.offensive_power
-    home_situations = (home_op - away_dp) / 1000
-    home_situations.times do
-      shoter, assister = pick_enders @match.home
-      goalkeeper = Player.find(@match.away.tactic.gk)
-      if goal? shoter, goalkeeper
-        if shoter == assister
-          situation = shoter.full_name + " bez asysty, gol!"
-        else
-          situation = assister.full_name + " podaje, " + shoter.full_name + " wykancza, gol!"
-        end
-        @match.home_score += 1
-      else
-        if shoter == assister
-          situation = shoter.full_name + " samolubnie, nie trafia"
-        else
-          situation = assister.full_name + " swietnie podaje, ale " + shoter.full_name + " partaczy jego wysilek"
-        end
-      end
-      @match.report += situation + "<br />"
-    end
 
-    away_situations = (away_op - home_dp) / 1000
+  private
+
+  def generate_match_events!
+    generate_home_goals!
+    generate_away_goals!
+    generate_injuries!
+  end
+
+  def generate_injuries!
+    players = @match.home.tactic.all_players + @match.away.tactic.all_players
+    for player in players do
+      susceptibility = 3000 - player.condition
+      r = rand(20000)
+      if r < susceptibility
+        event = MatchEvent.new
+        event.event_type = "injury"
+        event.match = @match
+        event.time = rand(1..90)
+        desc = InjuryDescription.order("RANDOM()").first
+        desc = desc.description
+        desc = desc.sub("X", player.full_name)
+        event.description = desc
+        event.first_player = player
+        event.save
+      end
+    end
+  end
+
+  def generate_away_goals!
+    goalkeeper = Player.find(@match.home.tactic.gk)
     away_situations.times do
-      shoter, assister = pick_enders @match.away
-      goalkeeper = Player.find(@match.home.tactic.gk)
-      if goal? shoter, goalkeeper
-        if shoter == assister
-          situation = shoter.full_name + " bez asysty, gol!"
+      shooter = Player.find(pick_shooter @match.away)
+      assistant = Player.find(pick_assistant @match.away)
+      if goal? shooter, goalkeeper
+        if shooter == assistant
+          generate_solo_goal!(shooter)
         else
-          situation = assister.full_name + " podaje, " + shoter.full_name + " wykancza, gol!"
+          generate_goal!(shooter, assistant)
         end
         @match.away_score += 1
-      else
-        if shoter == assister
-          situation = shoter.full_name + " samolubnie, nie trafia"
-        else
-          situation = assister.full_name + " swietnie podaje, ale " + shoter.full_name + " partaczy jego wysilek"
-        end
       end
-      @match.report += situation + "<br />"
     end
-
-    @match.save
-
   end
 
-  def pick_enders(team)
-    return team.players.sample, team.players.sample
+  def generate_home_goals!
+    goalkeeper = Player.find(@match.away.tactic.gk)
+    home_situations.times do
+      shooter = Player.find(pick_shooter @match.home)
+      assistant = Player.find(pick_assistant @match.home)
+      if goal? shooter, goalkeeper
+        if shooter == assistant
+          generate_solo_goal!(shooter)
+        else
+          generate_goal!(shooter, assistant)
+        end
+        @match.home_score += 1
+      end
+    end
   end
 
-  def goal?(shoter, goalkeeper)
+  def pick_assistant(team)
+    r = rand(1..100)
+    case r
+      when 1..10
+        team.tactic.s1
+      when 11..20
+        team.tactic.s2
+      when 21..45
+        team.tactic.am1
+      when 46..70
+        team.tactic.am2
+      when 71..75
+        team.tactic.dm1
+      when 76..80
+        team.tactic.dm2
+      when 81..85
+        team.tactic.d1
+      when 86..90
+        team.tactic.d2
+      when 91..95
+        team.tactic.d3
+      when 96..100
+        team.tactic.d4
+      else
+        "Impossibru"
+    end
+  end
+
+  def pick_shooter(team)
+    r = rand(1..100)
+    case r
+      when 1..20
+        team.tactic.s1
+      when 21..40
+        team.tactic.s2
+      when 41..50
+        team.tactic.am1
+      when 51..60
+        team.tactic.am2
+      when 61..70
+        team.tactic.dm1
+      when 71..80
+        team.tactic.dm2
+      when 81..85
+        team.tactic.d1
+      when 86..90
+        team.tactic.d2
+      when 91..95
+        team.tactic.d3
+      when 96..100
+        team.tactic.d4
+      else
+        "Impossibru"
+    end
+  end
+
+  def generate_goal!(shooter, assistant)
+    event = MatchEvent.new
+    event.event_type = "goal"
+    event.match = @match
+    event.time = rand(1..90)
+    desc = GoalDescription.order("RANDOM()").first
+    desc = desc.description
+    desc = desc.sub("X", shooter.full_name)
+    desc = desc.sub("Y", assistant.full_name)
+    event.description = desc
+    event.first_player = shooter
+    event.second_player = assistant
+    event.save
+  end
+
+  def generate_solo_goal!(shooter)
+    event = MatchEvent.new
+    event.event_type = "goal"
+    event.match = @match
+    event.time = rand(1..90)
+    desc = SoloGoalDescription.order("RANDOM()").first
+    desc = desc.description
+    desc = desc.sub("X", shooter.full_name)
+    event.description = desc
+    event.first_player = shooter
+    event.save
+  end
+
+
+
+  def goal?(shooter, goalkeeper)
     rand = rand(1000)
-    (shoter.s_power * 2 - goalkeeper.gk_power) > rand
+    (shooter.s_power * 2 - goalkeeper.gk_power) > rand
   end
 
   def calculate_attendance
@@ -84,4 +175,15 @@ class GenerateMatch
     [wanted, @match.home.stadium.capacity].min
   end
 
+  def home_situations
+    home_op = @match.home.offensive_power
+    away_dp = @match.away.defensive_power
+    (home_op - away_dp) / 1000
+  end
+
+  def away_situations
+    home_dp = @match.home.defensive_power
+    away_op = @match.away.offensive_power
+    (away_op - home_dp) / 1000
+  end
 end

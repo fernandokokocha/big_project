@@ -51,6 +51,8 @@
       %th Position power
       %th Tactic
       %th Salary
+      %th Goals
+      %th Assists
 
     - @team.players.each do |player|
       %tr
@@ -63,6 +65,8 @@
           -if @team.tactic.include? player
             %i.glyphicon.glyphicon-ok
         %td= player.salary
+        %td= MatchEvent.where(:event_type => "goal", :first_player => player).count
+        %td= MatchEvent.where(:event_type => "goal", :second_player => player).count
 
 -if @team.user == current_user
   %p

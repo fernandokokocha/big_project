@@ -1,0 +1,23 @@
+%h1 Listing match_events
+
+%table
+  %tr
+    %th Type
+    %th Time
+    %th Description
+    %th
+    %th
+    %th
+
+  - @match_events.each do |match_event|
+    %tr
+      %td= match_event.type
+      %td= match_event.time
+      %td= match_event.description
+      %td= link_to 'Show', match_event
+      %td= link_to 'Edit', edit_match_event_path(match_event)
+      %td= link_to 'Destroy', match_event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Match event', new_match_event_path

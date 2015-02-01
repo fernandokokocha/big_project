@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :yellow_card_descriptions
+
+  resources :red_card_descriptions
+
+  resources :injury_descriptions
+
+  resources :goal_descriptions
+
+  resources :solo_goal_descriptions
+
+  resources :match_events
+
   resources :matches
 
   resources :tactics

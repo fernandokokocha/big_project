@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126191429) do
+ActiveRecord::Schema.define(version: 20150201001542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "goal_descriptions", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "injury_descriptions", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mailboxer_conversation_opt_outs", force: true do |t|
     t.integer "unsubscriber_id"
@@ -69,12 +81,22 @@ ActiveRecord::Schema.define(version: 20150126191429) do
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
+  create_table "match_events", force: true do |t|
+    t.string   "event_type"
+    t.integer  "time"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "match_id"
+    t.integer  "first_player_id"
+    t.integer  "second_player_id"
+  end
+
   create_table "matches", force: true do |t|
     t.integer  "home_score"
     t.integer  "away_score"
     t.date     "date"
     t.integer  "attendance"
-    t.text     "report"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "home_id"
@@ -106,6 +128,18 @@ ActiveRecord::Schema.define(version: 20150126191429) do
   create_table "positions", force: true do |t|
     t.string   "name"
     t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "red_card_descriptions", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "solo_goal_descriptions", force: true do |t|
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -163,6 +197,12 @@ ActiveRecord::Schema.define(version: 20150126191429) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "yellow_card_descriptions", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", name: "mb_opt_outs_on_conversations_id", column: "conversation_id"
 

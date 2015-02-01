@@ -1,0 +1,2 @@
+module SoloGoalDescriptionsHelper
+end

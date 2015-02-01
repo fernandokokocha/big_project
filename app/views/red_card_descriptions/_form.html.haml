@@ -1,0 +1,13 @@
+= form_for @red_card_description do |f|
+  - if @red_card_description.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@red_card_description.errors.count, "error")} prohibited this red_card_description from being saved:"
+      %ul
+        - @red_card_description.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit 'Save'

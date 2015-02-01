@@ -1,0 +1,2 @@
+module InjuryDescriptionsHelper
+end

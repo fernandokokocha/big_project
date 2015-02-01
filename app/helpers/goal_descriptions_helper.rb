@@ -1,0 +1,2 @@
+module GoalDescriptionsHelper
+end

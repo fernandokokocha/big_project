@@ -11,3 +11,12 @@ Position.create(:name => "D", :value => 2)
 Position.create(:name => "DM", :value => 3)
 Position.create(:name => "AM", :value => 4)
 Position.create(:name => "S", :value => 5)
+
+GoalDescription.create(:description => "Y podaje, X wykancza, gol!")
+GoalDescription.create(:description => "X strzela gola, podawal Y.")
+
+SoloGoalDescription.create(:description => "X strzela gola po bledzie obroncy.")
+SoloGoalDescription.create(:description => "X samotnie przedarl sie przez obrone rywala i gol!")
+
+InjuryDescription.create(:description => "Paskudna kontuzja. X uderzyl glowa w slupek i odpadla mu glowa.")
+InjuryDescription.create(:description => "Przeciwnik gra bardzo ostro! X zostaje zniesiony z boiska z powodu kontuzji.")

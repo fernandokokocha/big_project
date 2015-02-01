@@ -2,8 +2,7 @@
 
 %table
   %tr
-    %th Home score
-    %th Away score
+    %th Score
     %th Date
     %th Attendance
     %th
@@ -12,8 +11,10 @@
 
   - @matches.each do |match|
     %tr
-      %td= match.home_score
-      %td= match.away_score
+      %td
+        =match.home_score
+        = '-'
+        =match.away_score
       %td= match.date
       %td= match.attendance
       %td= link_to 'Show', match

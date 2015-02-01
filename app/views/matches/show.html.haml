@@ -34,7 +34,15 @@
 
 %p
   %b Report:
-  = raw @match.report
+  %table.table.table-bordered.table-condensed
+    %tr
+      %th Minute
+      %th Event
+
+    - @match.match_events.order(:time).each do |event|
+      %tr
+        %td= event.time
+        %td= event.description
 
 = link_to 'Edit', edit_match_path(@match)
 \|
