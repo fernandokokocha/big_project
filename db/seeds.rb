@@ -24,3 +24,10 @@ InjuryDescription.create(:description => "Przeciwnik gra bardzo ostro! X zostaje
 YellowCardDescription.create(:description => "X dostaje żółtą kartkę za ostry wślizg.")
 YellowCardDescription.create(:description => "X dostaje żółtą kartkę za dyskusje z sędziami.")
 YellowCardDescription.create(:description => "X dostaje żółtą kartkę za zagranie ręką.")
+
+DoubleYellowCardDescription.create(:description => "X dostaje żółtą kartkę za zagranie ręką, a ponieważ miał już jedną na koncie - wylatuje z boiska!")
+DoubleYellowCardDescription.create(:description => "X fauluje rywala i dostaje drugą żółtą kartkę w meczu!")
+DoubleYellowCardDescription.create(:description => "X opóźnia grę i kończy się to dla niego fatalnie - drugą żółtą kartką.")
+
+RedCardDescription.create(:description => "X brutalnie fauluje rywala bez piłki - czerwona kartka.")
+RedCardDescription.create(:description => "X bezczelnie łapie piłkę w ręce - czerwona kartka!")

@@ -1,0 +1,2 @@
+module DoubleYellowCardDescriptionsHelper
+end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :double_yellow_card_descriptions
+
   resources :yellow_card_descriptions
 
   resources :red_card_descriptions

@@ -34,14 +34,17 @@
 
 %p
   %b Report:
+  %i.glyphicon.glyphicon-soccer-ball
   %table.table.table-bordered.table-condensed
     %tr
+      %th Event
       %th Team
       %th Minute
-      %th Event
+      %th Description
 
     - @match.match_events.order(:time).each do |event|
       %tr
+        %td= event.event_type
         %td
           -if event.first_player.team == @match.home
             =image_tag @match.home.logo_micro_path

@@ -83,24 +83,58 @@ class GenerateMatch
   def generate_cards!
     players = @match.home.tactic.all_players + @match.away.tactic.all_players
     players.each do |player|
-      generate_yellow_card! player
-    end
-  end
+      susceptibility = player.d_power
+      r1 = rand(15000)
+      r2 = rand(150000)
+      if r1 < susceptibility
+        if r2 < susceptibility
+          times = [rand(1..90), rand(1..90)]
 
-  def generate_yellow_card!(player)
-    susceptibility = 3000 - player.d_power
-    r = rand(10000)
-    if r < susceptibility
-      event = MatchEvent.new
-      event.event_type = "yellow card"
-      event.match = @match
-      event.time = rand(1..90)
-      desc = YellowCardDescription.order("RANDOM()").first
-      desc = desc.description
-      desc = desc.sub("X", player.full_name)
-      event.description = desc
-      event.first_player = player
-      event.save
+          event = MatchEvent.new
+          event.event_type = "yellow card"
+          event.match = @match
+          event.time = times.min
+          desc = DoubleYellowCardDescription.order("RANDOM()").first
+          desc = desc.description
+          desc = desc.sub("X", player.full_name)
+          event.description = desc
+          event.first_player = player
+          event.save
+
+          event = MatchEvent.new
+          event.event_type = "double yellow card"
+          event.match = @match
+          event.time = times.max
+          desc = DoubleYellowCardDescription.order("RANDOM()").first
+          desc = desc.description
+          desc = desc.sub("X", player.full_name)
+          event.description = desc
+          event.first_player = player
+          event.save
+        else
+          event = MatchEvent.new
+          event.event_type = "yellow card"
+          event.match = @match
+          event.time = rand(1..90)
+          desc = YellowCardDescription.order("RANDOM()").first
+          desc = desc.description
+          desc = desc.sub("X", player.full_name)
+          event.description = desc
+          event.first_player = player
+          event.save
+        end
+      elsif r2 < susceptibility
+        event = MatchEvent.new
+        event.event_type = "red card"
+        event.match = @match
+        event.time = rand(1..90)
+        desc = RedCardDescription.order("RANDOM()").first
+        desc = desc.description
+        desc = desc.sub("X", player.full_name)
+        event.description = desc
+        event.first_player = player
+        event.save
+      end
     end
   end
 
