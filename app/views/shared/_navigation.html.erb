@@ -7,7 +7,7 @@
       <% if current_user %>
       <ul class="nav navbar-nav">
         <li id="my-team-tab">
-          <%= link_to 'My team', team_path(current_user.team) %>
+          <%= link_to 'My team', my_team_path %>
         </li>
         <li id="teams-tab">
           <%= link_to 'Teams', teams_path %>

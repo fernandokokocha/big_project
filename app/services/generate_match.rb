@@ -29,7 +29,7 @@ class GenerateMatch
   end
   
   def generate_home_goals!
-    goalkeeper = Player.find(@match.away.tactic.gk)
+    goalkeeper = @match.away.tactic.gk
     home_situations.times do
       shooter = Player.find(pick_shooter @match.home)
       assistant = Player.find(pick_assistant @match.home)
@@ -45,10 +45,10 @@ class GenerateMatch
   end
   
   def generate_away_goals!
-    goalkeeper = Player.find(@match.home.tactic.gk)
+    goalkeeper = @match.home.tactic.gk
     away_situations.times do
-      shooter = Player.find(pick_shooter @match.away)
-      assistant = Player.find(pick_assistant @match.away)
+      shooter = pick_shooter @match.away
+      assistant = pick_assistant @match.away
       if goal? shooter, goalkeeper
         if shooter == assistant
           generate_solo_goal!(shooter)
