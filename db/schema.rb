@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201181232) do
+ActiveRecord::Schema.define(version: 20150202190906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,17 +159,17 @@ ActiveRecord::Schema.define(version: 20150201181232) do
   end
 
   create_table "tactics", force: true do |t|
-    t.integer  "gk"
-    t.integer  "d1"
-    t.integer  "d2"
-    t.integer  "d3"
-    t.integer  "d4"
-    t.integer  "dm1"
-    t.integer  "dm2"
-    t.integer  "am1"
-    t.integer  "am2"
-    t.integer  "s1"
-    t.integer  "s2"
+    t.integer  "gk_id"
+    t.integer  "d1_id"
+    t.integer  "d2_id"
+    t.integer  "d3_id"
+    t.integer  "d4_id"
+    t.integer  "dm1_id"
+    t.integer  "dm2_id"
+    t.integer  "am1_id"
+    t.integer  "am2_id"
+    t.integer  "s1_id"
+    t.integer  "s2_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

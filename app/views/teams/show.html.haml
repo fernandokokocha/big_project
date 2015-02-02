@@ -85,31 +85,31 @@
         = form_for @team.tactic, :url => tactic_path(@team.tactic), :method => :patch do |f|
           .row.big-vertical-padding
             .col-md-3.col-md-offset-3
-              = f.collection_select(:s1, @team.players, :id, :full_name)
+              = f.collection_select(:s1_id, @team.players, :id, :full_name)
             .col-md-6
-              = f.collection_select(:s2, @team.players, :id, :full_name)
+              = f.collection_select(:s2_id, @team.players, :id, :full_name)
           .row.big-vertical-padding
             .col-md-3
-              = f.collection_select(:am1, @team.players, :id, :full_name)
+              = f.collection_select(:am1_id, @team.players, :id, :full_name)
             .col-md-3.col-md-offset-6
-              = f.collection_select(:am2, @team.players, :id, :full_name)
+              = f.collection_select(:am2_id, @team.players, :id, :full_name)
           .row.big-vertical-padding
             .col-md-3.col-md-offset-3
-              = f.collection_select(:dm1, @team.players, :id, :full_name)
+              = f.collection_select(:dm1_id, @team.players, :id, :full_name)
             .col-md-6
-              = f.collection_select(:dm2, @team.players, :id, :full_name)
+              = f.collection_select(:dm2_id, @team.players, :id, :full_name)
           .row.big-vertical-padding
             .col-md-3
-              = f.collection_select(:d1, @team.players, :id, :full_name)
+              = f.collection_select(:d1_id, @team.players, :id, :full_name)
             .col-md-3
-              = f.collection_select(:d2, @team.players, :id, :full_name)
+              = f.collection_select(:d2_id, @team.players, :id, :full_name)
             .col-md-3
-              = f.collection_select(:d3, @team.players, :id, :full_name)
+              = f.collection_select(:d3_id, @team.players, :id, :full_name)
             .col-md-3
-              = f.collection_select(:d4, @team.players, :id, :full_name)
+              = f.collection_select(:d4_id, @team.players, :id, :full_name)
           .row.big-vertical-padding
             .col-md-6.col-md-offset-5
-              = f.collection_select(:gk, @team.players, :id, :full_name)
+              = f.collection_select(:gk_id, @team.players, :id, :full_name)
           .actions
             = f.submit 'Save'
 

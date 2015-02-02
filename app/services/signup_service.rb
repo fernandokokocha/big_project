@@ -23,7 +23,7 @@ class SignupService
       4.times {generate_am!}
       4.times {generate_s!}
 
-      initial_tactic!
+      generate_initial_tactic!
     end
 
     form_object
@@ -34,7 +34,8 @@ class SignupService
     false
   end
 
-  def initial_tactic!
+  private
+  def generate_initial_tactic!
     gk = Position.find_by_name("GK")
     d = Position.find_by_name("D")
     dm = Position.find_by_name("DM")
@@ -47,23 +48,22 @@ class SignupService
     s_players = @team.players.where(position: s).sort {|a,b| a.s_power <=> b.s_power}.reverse
 
     tactic = Tactic.new
-    tactic.gk = gk_players.first.id
-    tactic.d1 = d_players.first.id
-    tactic.d2 = d_players[1].id
-    tactic.d3 = d_players[2].id
-    tactic.d4 = d_players[3].id
-    tactic.dm1 = dm_players.first.id
-    tactic.dm2 = dm_players[1].id
-    tactic.am1 = am_players.first.id
-    tactic.am2 = am_players[1].id
-    tactic.s1 = s_players.first.id
-    tactic.s2 = s_players[1].id
+    tactic.gk = gk_players.first
+    tactic.d1 = d_players.first
+    tactic.d2 = d_players[1]
+    tactic.d3 = d_players[2]
+    tactic.d4 = d_players[3]
+    tactic.dm1 = dm_players.first
+    tactic.dm2 = dm_players[1]
+    tactic.am1 = am_players.first
+    tactic.am2 = am_players[1]
+    tactic.s1 = s_players.first
+    tactic.s2 = s_players[1]
 
     @team.tactic = tactic
     tactic.save!
   end
 
-  private
   def generate_player
     player = Player.new
     player.team = @team
