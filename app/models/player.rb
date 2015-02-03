@@ -7,7 +7,8 @@ class Player < ActiveRecord::Base
   end
 
   def current_age
-    ((Date.today - birthdate)/365.25).to_i
+    now = Time.now.utc.to_date
+    now.year - birthdate.year - (birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
   end
 
   def gk_power
