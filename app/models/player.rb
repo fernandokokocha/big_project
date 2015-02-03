@@ -3,7 +3,7 @@ class Player < ActiveRecord::Base
   belongs_to :position
 
   def full_name
-    first_name + " " + last_name
+    first_name + ' ' + last_name
   end
 
   def current_age
@@ -33,18 +33,18 @@ class Player < ActiveRecord::Base
 
   def position_power
     case position.name
-      when "GK"
+      when 'GK'
         gk_power
-      when "D"
+      when 'D'
         d_power
-      when "DM"
+      when 'DM'
         dm_power
-      when "AM"
+      when 'AM'
         am_power
-      when "S"
+      when 'S'
         s_power
       else
-        "LOL"
+        'LOL'
     end
   end
 end

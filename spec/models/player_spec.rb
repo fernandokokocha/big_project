@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Player, :type => :model do
-  it "puts full name properly" do
+  it 'puts full name properly' do
     player = get_player
-    expect(player.full_name).to eq("First Last")
+    expect(player.full_name).to eq('First Last')
   end
 
-  it "calculates current age" do
+  it 'calculates current age' do
     player = get_player
     expect(player.current_age).to eq(21)
   end
 
-  it "calculates positions powers" do
+  it 'calculates positions powers' do
     player = get_player
     expect(player.gk_power).to eq(player.handling + player.reflex)
     expect(player.d_power).to eq(player.discipline + player.tackling)
@@ -20,7 +20,7 @@ RSpec.describe Player, :type => :model do
     expect(player.s_power).to eq(player.instinct + player.shots)
   end
 
-  it "choses proper position power" do
+  it 'choses proper position power' do
     player = get_player
     player.position = gk_position
     expect(player.position_power).to eq(player.handling + player.reflex)
@@ -35,8 +35,8 @@ RSpec.describe Player, :type => :model do
   end
 
   def get_player
-    Player.new(:first_name => "First",
-               :last_name => "Last",
+    Player.new(:first_name => 'First',
+               :last_name => 'Last',
                :handling => 1,
                :reflex => 2,
                :discipline => 3,
@@ -51,22 +51,22 @@ RSpec.describe Player, :type => :model do
   end
 
   def gk_position
-    Position.new(:name => "GK")
+    Position.new(:name => 'GK')
   end
 
   def d_position
-    Position.new(:name => "D")
+    Position.new(:name => 'D')
   end
 
   def dm_position
-    Position.new(:name => "DM")
+    Position.new(:name => 'DM')
   end
 
   def am_position
-    Position.new(:name => "AM")
+    Position.new(:name => 'AM')
   end
 
   def s_position
-    Position.new(:name => "S")
+    Position.new(:name => 'S')
   end
 end

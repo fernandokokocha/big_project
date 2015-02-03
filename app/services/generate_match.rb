@@ -67,12 +67,12 @@ class GenerateMatch
       r = rand(20000)
       if r < susceptibility
         event = MatchEvent.new
-        event.event_type = "injury"
+        event.event_type = 'injury'
         event.match = @match
         event.time = rand(1..90)
-        desc = InjuryDescription.order("RANDOM()").first
+        desc = InjuryDescription.order('RANDOM()').first
         desc = desc.description
-        desc = desc.sub("X", player.full_name)
+        desc = desc.sub('X', player.full_name)
         event.description = desc
         event.first_player = player
         event.save
@@ -91,46 +91,46 @@ class GenerateMatch
           times = [rand(1..90), rand(1..90)]
 
           event = MatchEvent.new
-          event.event_type = "yellow card"
+          event.event_type = 'yellow card'
           event.match = @match
           event.time = times.min
-          desc = DoubleYellowCardDescription.order("RANDOM()").first
+          desc = DoubleYellowCardDescription.order('RANDOM()').first
           desc = desc.description
-          desc = desc.sub("X", player.full_name)
+          desc = desc.sub('X', player.full_name)
           event.description = desc
           event.first_player = player
           event.save
 
           event = MatchEvent.new
-          event.event_type = "double yellow card"
+          event.event_type = 'double yellow card'
           event.match = @match
           event.time = times.max
-          desc = DoubleYellowCardDescription.order("RANDOM()").first
+          desc = DoubleYellowCardDescription.order('RANDOM()').first
           desc = desc.description
-          desc = desc.sub("X", player.full_name)
+          desc = desc.sub('X', player.full_name)
           event.description = desc
           event.first_player = player
           event.save
         else
           event = MatchEvent.new
-          event.event_type = "yellow card"
+          event.event_type = 'yellow card'
           event.match = @match
           event.time = rand(1..90)
-          desc = YellowCardDescription.order("RANDOM()").first
+          desc = YellowCardDescription.order('RANDOM()').first
           desc = desc.description
-          desc = desc.sub("X", player.full_name)
+          desc = desc.sub('X', player.full_name)
           event.description = desc
           event.first_player = player
           event.save
         end
       elsif r2 < susceptibility
         event = MatchEvent.new
-        event.event_type = "red card"
+        event.event_type = 'red card'
         event.match = @match
         event.time = rand(1..90)
-        desc = RedCardDescription.order("RANDOM()").first
+        desc = RedCardDescription.order('RANDOM()').first
         desc = desc.description
-        desc = desc.sub("X", player.full_name)
+        desc = desc.sub('X', player.full_name)
         event.description = desc
         event.first_player = player
         event.save
@@ -162,7 +162,7 @@ class GenerateMatch
       when 96..100
         team.tactic.d4
       else
-        "Impossibru"
+        'Impossibru'
     end
   end
 
@@ -190,19 +190,19 @@ class GenerateMatch
       when 96..100
         team.tactic.d4
       else
-        "Impossibru"
+        'Impossibru'
     end
   end
 
   def generate_goal!(shooter, assistant)
     event = MatchEvent.new
-    event.event_type = "goal"
+    event.event_type = 'goal'
     event.match = @match
     event.time = rand(1..90)
-    desc = GoalDescription.order("RANDOM()").first
+    desc = GoalDescription.order('RANDOM()').first
     desc = desc.description
-    desc = desc.sub("X", shooter.full_name)
-    desc = desc.sub("Y", assistant.full_name)
+    desc = desc.sub('X', shooter.full_name)
+    desc = desc.sub('Y', assistant.full_name)
     event.description = desc
     event.first_player = shooter
     event.second_player = assistant
@@ -211,12 +211,12 @@ class GenerateMatch
 
   def generate_solo_goal!(shooter)
     event = MatchEvent.new
-    event.event_type = "goal"
+    event.event_type = 'goal'
     event.match = @match
     event.time = rand(1..90)
-    desc = SoloGoalDescription.order("RANDOM()").first
+    desc = SoloGoalDescription.order('RANDOM()').first
     desc = desc.description
-    desc = desc.sub("X", shooter.full_name)
+    desc = desc.sub('X', shooter.full_name)
     event.description = desc
     event.first_player = shooter
     event.save

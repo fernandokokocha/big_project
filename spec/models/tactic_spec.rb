@@ -30,42 +30,42 @@ RSpec.describe Tactic, :type => :model do
     @players = [@gk] + @field_players
   end
 
-  it "knows which players are included" do
+  it 'knows which players are included' do
     @players.each do |player|
       expect(@tactic.include? player).to be true
     end
   end
 
-  it "knows which players are not included" do
+  it 'knows which players are not included' do
     player_not_included = Player.new
     expect(@tactic.include? player_not_included).to be false
   end
 
-  it "selects all players" do
+  it 'selects all players' do
     expect(@tactic.all_players).to eq(@players)
   end
 
-  it "selects all field players" do
+  it 'selects all field players' do
     expect(@tactic.all_field_players).to eq(@field_players)
   end
 
   def gk_position
-    Position.new(:name => "GK")
+    Position.new(:name => 'GK')
   end
 
   def d_position
-    Position.new(:name => "D")
+    Position.new(:name => 'D')
   end
 
   def dm_position
-    Position.new(:name => "DM")
+    Position.new(:name => 'DM')
   end
 
   def am_position
-    Position.new(:name => "AM")
+    Position.new(:name => 'AM')
   end
 
   def s_position
-    Position.new(:name => "S")
+    Position.new(:name => 'S')
   end
 end

@@ -20,15 +20,15 @@ class TeamLogoUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "default_logo.jpg"
+    'default_logo.jpg'
   end
 
   def default_thumb_url
-    "default_logo_thumb.jpg"
+    'default_logo_thumb.jpg'
   end
 
   def default_micro_url
-    "default_logo_micro.jpg"
+    'default_logo_micro.jpg'
   end
 
   def extension_white_list
@@ -36,7 +36,7 @@ class TeamLogoUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "logo.jpg" if original_filename
+    'logo.jpg' if original_filename
   end
 
 end

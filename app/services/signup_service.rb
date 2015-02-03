@@ -7,7 +7,7 @@ class SignupService
                           password: form_object.password,
                           password_confirmation: form_object.password_confirmation)
 
-      stadium = Stadium.create!(name: form_object.team_name + " Arena",
+      stadium = Stadium.create!(name: "#{form_object.team_name} Arena",
                                 capacity: 10000,
                                 roof: false)
 
@@ -30,17 +30,17 @@ class SignupService
   rescue form_object.class::ValidationError
     false
   rescue ActiveRecord::RecordInvalid
-    form_object.errors.add(:email, "already exists")
+    form_object.errors.add(:email, 'already exists')
     false
   end
 
   private
   def generate_initial_tactic!
-    gk = Position.find_by_name("GK")
-    d = Position.find_by_name("D")
-    dm = Position.find_by_name("DM")
-    am = Position.find_by_name("AM")
-    s = Position.find_by_name("S")
+    gk = Position.find_by_name('GK')
+    d = Position.find_by_name('D')
+    dm = Position.find_by_name('DM')
+    am = Position.find_by_name('AM')
+    s = Position.find_by_name('S')
     gk_players = @team.players.where(position: gk).sort {|a,b| a.gk_power <=> b.gk_power}.reverse
     d_players = @team.players.where(position: d).sort {|a,b| a.d_power <=> b.d_power}.reverse
     dm_players = @team.players.where(position: dm).sort {|a,b| a.dm_power <=> b.dm_power}.reverse
@@ -69,7 +69,7 @@ class SignupService
     player.team = @team
     loop do
       player.first_name = Faker::Name.first_name
-      break unless ["a", "e"].include? player.first_name[-1, 1]
+      break unless %w(a e).include? player.first_name[-1, 1]
     end
     player.last_name = Faker::Name.last_name
     player.birthdate = Faker::Date.between(Date.today - 30.years, Date.today - 18.years)
@@ -91,7 +91,7 @@ class SignupService
 
   def generate_gk!
     player = generate_player
-    player.position = Position.find_by_name("GK")
+    player.position = Position.find_by_name('GK')
     player.reflex += 1000
     player.handling += 1000
     player.save
@@ -99,7 +99,7 @@ class SignupService
 
   def generate_d!
     player = generate_player
-    player.position = Position.find_by_name("D")
+    player.position = Position.find_by_name('D')
     player.discipline += 1000
     player.tackling += 1000
     player.save
@@ -107,7 +107,7 @@ class SignupService
 
   def generate_dm!
     player = generate_player
-    player.position = Position.find_by_name("DM")
+    player.position = Position.find_by_name('DM')
     player.work_rate += 1000
     player.positioning += 1000
     player.save
@@ -115,7 +115,7 @@ class SignupService
 
   def generate_am!
     player = generate_player
-    player.position = Position.find_by_name("AM")
+    player.position = Position.find_by_name('AM')
     player.creativity += 1000
     player.technique += 1000
     player.save
@@ -123,7 +123,7 @@ class SignupService
 
   def generate_s!
     player = generate_player
-    player.position = Position.find_by_name("S")
+    player.position = Position.find_by_name('S')
     player.instinct += 1000
     player.shots += 1000
     player.save
