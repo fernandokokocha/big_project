@@ -35,6 +35,10 @@ class TeamsController < ApplicationController
     respond_with(@team)
   end
 
+  def my_team
+    @team = Team.find(current_user.team.id)
+  end
+
   private
     def set_team
       @team = Team.find(params[:id])

@@ -23,7 +23,8 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
   post '/signup', :to=>"welcome#create", :as=>"signups"
-  get '/my_team', :to=>"welcome#my_team"
+  get '/my_team', :to=>"teams#my_team"
+  get '/play_match', :to=>"matches#play_match"
   resources :players
   resources :teams
   devise_for :users

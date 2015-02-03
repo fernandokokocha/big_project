@@ -40,6 +40,10 @@ class MatchesController < ApplicationController
     respond_with(@match)
   end
 
+  def play_match
+    @match = Match.new
+  end
+
   private
     def set_match
       @match = Match.find(params[:id])

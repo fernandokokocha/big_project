@@ -17,10 +17,6 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def my_team
-    @team = Team.find(current_user.team.id)
-  end
-
   private
 
   def signup_params
