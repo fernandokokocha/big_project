@@ -42,7 +42,7 @@
       %th Minute
       %th Description
 
-    - @match.match_events.order(:time).each do |event|
+    - @match.events.each do |event|
       %tr
         %td= event.event_type
         %td
