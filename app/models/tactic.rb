@@ -16,6 +16,15 @@ class Tactic < ActiveRecord::Base
     reflections_values.include? player
   end
 
+  def all_field_players
+    reflections_values_without_gk
+  end
+
+  def all_players
+    reflections_values
+  end
+
+  private
   def reflections_values
     reflections = Tactic.reflections.select do |association_name, reflection|
       reflection.macro == :belongs_to
@@ -28,14 +37,6 @@ class Tactic < ActiveRecord::Base
       reflection.macro == :belongs_to and reflection.name != :gk
     end
     reflections.values.map { |reflection| send(reflection.name) }
-  end
-
-  def all_field_players
-    reflections_values_without_gk
-  end
-
-  def all_players
-    reflections_values
   end
 end
 
