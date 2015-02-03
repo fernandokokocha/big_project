@@ -13,31 +13,29 @@ class Tactic < ActiveRecord::Base
   belongs_to :s2, class_name: 'Player'
 
   def include? player
-    attributes.each do |key, value|
-      next if key == "id"
-      return true if value == player.id
+    reflections_values.include? player
+  end
+
+  def reflections_values
+    reflections = Tactic.reflections.select do |association_name, reflection|
+      reflection.macro == :belongs_to
     end
-    false
+    reflections.values.map { |reflection| send(reflection.name) }
+  end
+
+  def reflections_values_without_gk
+    reflections = Tactic.reflections.select do |association_name, reflection|
+      reflection.macro == :belongs_to and reflection.name != :gk
+    end
+    reflections.values.map { |reflection| send(reflection.name) }
   end
 
   def all_field_players
-    result = []
-    result << d1
-    result << d2
-    result << d3
-    result << d4
-    result << dm1
-    result << dm2
-    result << am1
-    result << am2
-    result << s1
-    result << s2
-    result
+    reflections_values_without_gk
   end
 
   def all_players
-    result = all_field_players
-    result << gk
-    result
+    reflections_values
   end
 end
+
