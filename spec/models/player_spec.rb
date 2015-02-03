@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Player, :type => :model do
+  include Helpers
+
   it 'puts full name properly' do
     player = get_player
     expect(player.full_name).to eq('First Last')
@@ -48,25 +50,5 @@ RSpec.describe Player, :type => :model do
                :instinct => 9,
                :shots => 10,
                :birthdate => Date.today - 21.years)
-  end
-
-  def gk_position
-    Position.new(:name => 'GK')
-  end
-
-  def d_position
-    Position.new(:name => 'D')
-  end
-
-  def dm_position
-    Position.new(:name => 'DM')
-  end
-
-  def am_position
-    Position.new(:name => 'AM')
-  end
-
-  def s_position
-    Position.new(:name => 'S')
   end
 end

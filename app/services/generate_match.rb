@@ -235,14 +235,14 @@ class GenerateMatch
   end
 
   def home_situations
-    home_op = @match.home.offensive_power
-    away_dp = @match.away.defensive_power
+    home_op = @match.home.tactic.offensive_power
+    away_dp = @match.away.tactic.defensive_power
     (home_op - away_dp) / 1000
   end
 
   def away_situations
-    home_dp = @match.home.defensive_power
-    away_op = @match.away.offensive_power
+    home_dp = @match.home.tactic.defensive_power
+    away_op = @match.away.tactic.offensive_power
     (away_op - home_dp) / 1000
   end
 end

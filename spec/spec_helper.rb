@@ -92,4 +92,24 @@ module Helpers
   def alphabet_without_Y
     "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWXZ"
   end
+
+  def gk_position
+    Position.new(:name => 'GK')
+  end
+
+  def d_position
+    Position.new(:name => 'D')
+  end
+
+  def dm_position
+    Position.new(:name => 'DM')
+  end
+
+  def am_position
+    Position.new(:name => 'AM')
+  end
+
+  def s_position
+    Position.new(:name => 'S')
+  end
 end
