@@ -15,6 +15,11 @@
         <li id="new-match-tab">
           <%= link_to 'Play match', play_match_path %>
         </li>
+        <% if current_user.admin? %>
+          <li id="new-match-tab">
+            <%= link_to 'Admin panel', my_team_path %>
+          </li>
+        <% end %>
       </ul>
       <% end %>
 
