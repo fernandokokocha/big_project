@@ -86,11 +86,11 @@ end
 
 module Helpers
   def alphabet_without_X
-    "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWYZ"
+    'abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWYZ'
   end
 
   def alphabet_without_Y
-    "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWXZ"
+    'abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWXZ'
   end
 
   def gk_position
