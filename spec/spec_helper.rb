@@ -83,3 +83,13 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+module Helpers
+  def alphabet_without_X
+    "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWYZ"
+  end
+
+  def alphabet_without_Y
+    "abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWXZ"
+  end
+end
