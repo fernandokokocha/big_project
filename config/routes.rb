@@ -1,33 +1,28 @@
 Rails.application.routes.draw do
-  resources :double_yellow_card_descriptions
+  root to: 'welcome#index'
 
-  resources :yellow_card_descriptions
-
-  resources :red_card_descriptions
-
-  resources :injury_descriptions
-
-  resources :goal_descriptions
-
-  resources :solo_goal_descriptions
+  post '/signup', :to=>'welcome#create', :as=>'signups'
+  get '/my_team', :to=>'teams#my_team'
+  get '/play_match', :to=>'matches#play_match'
+  get '/admin' => 'admin#index'
 
   resources :match_events
-
   resources :matches
-
   resources :tactics
-
   resources :stadia
-
   resources :positions
-
-  root to: 'welcome#index'
-  post '/signup', :to=>"welcome#create", :as=>"signups"
-  get '/my_team', :to=>"teams#my_team"
-  get '/play_match', :to=>"matches#play_match"
   resources :players
   resources :teams
   devise_for :users
+
+  namespace :admin do
+    resources :double_yellow_card_descriptions
+    resources :yellow_card_descriptions
+    resources :red_card_descriptions
+    resources :injury_descriptions
+    resources :goal_descriptions
+    resources :solo_goal_descriptions
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

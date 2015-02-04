@@ -1,0 +1,19 @@
+%h1 Listing injury_descriptions
+
+%table
+  %tr
+    %th Description
+    %th
+    %th
+    %th
+
+  - @injury_descriptions.each do |injury_description|
+    %tr
+      %td= injury_description.description
+      %td= link_to 'Show', [:admin, injury_description]
+      %td= link_to 'Edit', edit_admin_injury_description_path(injury_description)
+      %td= link_to 'Destroy', [:admin, injury_description], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Injury description', new_admin_injury_description_path

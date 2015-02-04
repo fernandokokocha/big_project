@@ -1,0 +1,19 @@
+%h1 Listing goal_descriptions
+
+%table
+  %tr
+    %th Description
+    %th
+    %th
+    %th
+
+  - @goal_descriptions.each do |goal_description|
+    %tr
+      %td= goal_description.description
+      %td= link_to 'Show', [:admin, goal_description]
+      %td= link_to 'Edit', edit_admin_goal_description_path(goal_description)
+      %td= link_to 'Destroy', [:admin, goal_description], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Goal description', new_admin_goal_description_path

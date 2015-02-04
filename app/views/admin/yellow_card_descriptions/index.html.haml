@@ -1,0 +1,19 @@
+%h1 Listing yellow_card_descriptions
+
+%table
+  %tr
+    %th Description
+    %th
+    %th
+    %th
+
+  - @yellow_card_descriptions.each do |yellow_card_description|
+    %tr
+      %td= yellow_card_description.description
+      %td= link_to 'Show', [:admin, yellow_card_description]
+      %td= link_to 'Edit', edit_admin_yellow_card_description_path(yellow_card_description)
+      %td= link_to 'Destroy', [:admin, yellow_card_description], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Yellow card description', new_admin_yellow_card_description_path

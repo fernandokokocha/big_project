@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   def mailboxer_email(object)
     nil
   end
+
+  def to_s
+    email
+  end
 end

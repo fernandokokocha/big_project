@@ -5,8 +5,10 @@
         =image_tag @team.logo
       -else
         =image_tag @team.logo.default_url
-  .col-md-9.team-name
-    = @team.name
+  .col-md-9.page-header
+    %h1
+      = @team.name
+      .small= @team.user
 
 -if @team.user == current_user
   %p

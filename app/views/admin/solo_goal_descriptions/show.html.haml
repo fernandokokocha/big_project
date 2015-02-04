@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @solo_goal_description.description
+
+= link_to 'Edit', edit_admin_solo_goal_description_path(@solo_goal_description)
+\|
+= link_to 'Back', admin_solo_goal_descriptions_path

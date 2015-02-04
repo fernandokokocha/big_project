@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @injury_description.description
+
+= link_to 'Edit', edit_admin_injury_description_path(@injury_description)
+\|
+= link_to 'Back', admin_injury_descriptions_path
