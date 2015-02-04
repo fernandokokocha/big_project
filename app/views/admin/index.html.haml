@@ -28,4 +28,4 @@
           %td
             -unless user.admin?
               =form_tag(admin_grant_path(user), method: :put) do
-                =submit_tag 'Grant admin'
+                =submit_tag 'Grant admin', :class => 'btn btn-xs'
