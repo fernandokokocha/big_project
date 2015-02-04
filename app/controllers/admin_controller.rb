@@ -16,7 +16,7 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_path, notice: "Admin rights granted to ##{@user}." }
+        format.html { redirect_to admin_path, notice: "Admin rights granted to #{@user}." }
       else
         format.html { render admin_path }
       end
