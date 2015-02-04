@@ -7,5 +7,19 @@ class AdminController < ApplicationController
   end
 
   def index
+    @users = User.all
+  end
+
+  def grant
+    @user = User.find(params[:id])
+    @user.admin = true
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to admin_path, notice: 'Admin rights granted.' }
+      else
+        format.html { render admin_path }
+      end
+    end
   end
 end

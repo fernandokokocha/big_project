@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   post '/signup', :to=>'welcome#create', :as=>'signups'
   get '/my_team', :to=>'teams#my_team'
   get '/play_match', :to=>'matches#play_match'
-  get '/admin' => 'admin#index'
+  get '/admin' => 'admin#index', :as => 'admin'
+  put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
 
   resources :match_events
   resources :matches
