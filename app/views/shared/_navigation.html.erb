@@ -1,7 +1,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <%= link_to 'Play Ball', root_path, :class => "navbar-brand" %>
+      <%= link_to 'Play Ball', root_path, :class => 'navbar-brand' %>
     </div>
     <div>
       <% if current_user %>
@@ -26,16 +26,8 @@
       <% if current_user %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to destroy_user_session_path, :method => "delete" do %>
+            <%= link_to destroy_user_session_path, :method => 'delete' do %>
               <i class="glyphicon glyphicon-log-out"></i> Sign out
-            <% end %>
-          </li>
-        </ul>
-      <% else %>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <%= link_to new_user_session_path  do%>
-              <i class="glyphicon glyphicon-log-in"></i> Sign in
             <% end %>
           </li>
         </ul>
