@@ -72,7 +72,7 @@ class SignupService
       break unless %w(a e).include? player.first_name[-1, 1]
     end
     player.last_name = Faker::Name.last_name
-    player.birthdate = Faker::Date.between(Date.today - 30.years, Date.today - 18.years)
+    player.birthdate = Faker::Date.between(30.years.ago, 18.years.ago)
     player.salary = 10000
     player.reflex = 100 + rand(1000)
     player.handling = 100 + rand(1000)

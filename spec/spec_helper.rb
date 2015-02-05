@@ -1,4 +1,5 @@
 require 'devise'
+require 'factory_girl'
 
 module ControllerHelpers
   def sign_in(user = double('user'))
@@ -24,6 +25,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
   config.include ControllerHelpers, :type => :controller
+  config.include FactoryGirl::Syntax::Methods
 end
 
 

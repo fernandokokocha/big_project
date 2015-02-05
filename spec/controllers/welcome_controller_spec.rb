@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe WelcomeController, :type => :controller do
 
+  before (:suite) do
+    FactoryGirl.lint
+  end
+
   describe 'when not logged in' do
     it 'renders welcome page' do
       sign_in nil
@@ -12,7 +16,8 @@ RSpec.describe WelcomeController, :type => :controller do
 
   describe 'when logged in' do
     it 'redirects to my team path' do
-      sign_in
+      user = build(:user)
+      sign_in user
       get :index
       expect(response).to redirect_to(my_team_path)
     end
