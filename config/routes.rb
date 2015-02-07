@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/play_match', :to=>'matches#play_match'
   get '/admin' => 'admin#index', :as => 'admin'
   put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
+  devise_for :users
 
   resources :match_events
   resources :matches
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
   resources :positions
   resources :players
   resources :teams
-  devise_for :users
 
   namespace :admin do
     resources :double_yellow_card_descriptions

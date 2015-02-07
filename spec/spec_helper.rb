@@ -1,5 +1,6 @@
 require 'devise'
 require 'factory_girl'
+require 'database_cleaner'
 
 module ControllerHelpers
   def sign_in(user = double('user'))
@@ -24,8 +25,18 @@ RSpec.configure do |config|
   end
 
   config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
   config.include ControllerHelpers, :type => :controller
   config.include FactoryGirl::Syntax::Methods
+
+  config.before(:suite) do
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
+  end
 end
 
 

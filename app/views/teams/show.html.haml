@@ -2,9 +2,9 @@
   .col-md-3
     %p
       -if @team.logo.present?
-        =image_tag @team.logo
+        =image_tag @team.logo, :id => 'team-logo'
       -else
-        =image_tag @team.logo.default_url
+        =image_tag @team.logo.default_url, :id => 'team-logo'
   .col-md-9.page-header
     %h1
       = @team.name
@@ -98,8 +98,3 @@
               = f.collection_select(:gk_id, @team.players, :id, :full_name)
           .actions
             = f.submit 'Save'
-
-
-= link_to 'Edit', edit_team_path(@team)
-\|
-= link_to 'Back', teams_path

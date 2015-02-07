@@ -14,4 +14,20 @@ FactoryGirl.define do
     password 'password'
     admin true
   end
+
+  factory :stadium do
+    name 'Arena'
+    capacity 1000
+    roof false
+  end
+
+  factory :tactic do
+  end
+
+  factory :team do
+    name 'Team'
+    stadium
+    user
+    tactic
+  end
 end
