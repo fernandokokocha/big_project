@@ -1,29 +1,32 @@
-%p#notice= notice
-
 %h2
   %i.glyphicon.glyphicon-user
   = @player.first_name
   = @player.last_name
 
-%p
-  %i.glyphicon.glyphicon-star
-  %b Team:
-  = @player.team.name
-%p
-  %i.glyphicon.glyphicon-asterisk
-  %b Position:
-  = @player.position.name
-%p
-  %i.glyphicon.glyphicon-minus
-  %b Birthdate:
-  = @player.birthdate
-  = surround '(', ')' do
-    = @player.current_age
-    years old
-%p
-  %i.glyphicon.glyphicon-usd
-  %b Salary:
-  = @player.salary
+.row
+  .col-md-3
+    %p
+      %i.glyphicon.glyphicon-star
+      %b Team:
+      = link_to @player.team.name, @player.team
+  .col-md-3
+    %p
+      %i.glyphicon.glyphicon-asterisk
+      %b Position:
+      = @player.position.name
+  .col-md-3
+    %p
+      %i.glyphicon.glyphicon-minus
+      %b Birthdate:
+      = @player.birthdate
+      = surround '(', ')' do
+        = @player.current_age
+        years old
+  .col-md-3
+    %p
+      %i.glyphicon.glyphicon-usd
+      %b Salary:
+      = @player.salary
 
 %p
   %i.glyphicon.glyphicon-star-empty
@@ -69,8 +72,3 @@
       %td= @player.shots / 100
       %td
       %td
-
-
-= link_to 'Edit', edit_player_path(@player)
-\|
-= link_to 'Back', players_path

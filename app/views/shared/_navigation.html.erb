@@ -6,32 +6,44 @@
     <div>
       <% if current_user %>
       <ul class="nav navbar-nav">
-        <li id="my-team-tab">
-          <%= link_to 'My team', my_team_path %>
+        <li id="my-team-tab" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My team<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <%= link_to 'Overview', my_team_path %>
+            </li>
+            <li>
+              <%= link_to 'Players', players_path %>
+            </li>
+            <li>
+              <%= link_to 'Tactic', tactic_path %>
+            </li>
+            <li>
+              <%= link_to 'Stadium', stadium_path %>
+            </li>
+            <li>
+              <%= link_to 'Finance', finance_path %>
+            </li>
+          </ul>
         </li>
-        <li id="teams-tab">
-          <%= link_to 'Teams', teams_path %>
-        </li>
-        <li id="play-match-tab">
-          <%= link_to 'Play match', play_match_path %>
-        </li>
-        <% if current_user.admin? %>
-          <li id="admin-tab">
-            <%= link_to 'Admin panel', admin_path %>
-          </li>
-        <% end %>
       </ul>
       <% end %>
 
+
+      <ul class="nav navbar-nav navbar-right">
+      <% if current_user.admin? %>
+        <li id="admin-tab">
+          <%= link_to 'Admin panel', admin_path %>
+        </li>
+      <% end %>
       <% if current_user %>
-        <ul class="nav navbar-nav navbar-right">
           <li>
             <%= link_to destroy_user_session_path, :method => 'delete' do %>
               <i class="glyphicon glyphicon-log-out"></i> Sign out
             <% end %>
           </li>
-        </ul>
       <% end %>
+      </ul>
     </div>
   </div>
 </nav>

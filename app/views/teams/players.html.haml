@@ -1,21 +1,5 @@
-.row
-  .col-md-3
-    %p= image_tag @team.logo_path, :id => 'team-logo'
-  .col-md-9.page-header
-    %h1
-      = @team.name
-      .small= @team.user
-
 %p
-  %i.glyphicon.glyphicon-home
-  %b Stadium:
-  =@team.stadium.name
-  %b Capacity:
-  =@team.stadium.capacity
-  %b Roof:
-  =@team.stadium.roof
-
-%p
+  =image_tag @team.logo_micro_path
   %i.glyphicon.glyphicon-user
   %b Players
   %table.table.table-striped.table-bordered.table-hover.table-condensed

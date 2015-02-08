@@ -3,18 +3,17 @@ Rails.application.routes.draw do
 
   post '/signup', :to=>'welcome#create', :as=>'signups'
   get '/my_team', :to=>'teams#my_team'
-  get '/play_match', :to=>'matches#play_match'
+  get '/players', :to=>'teams#players'
+  get '/tactic', :to=>'teams#tactic'
+  patch '/tactic', :to=>'tactics#update'
+  get '/stadium', :to=>'teams#stadium'
+  get '/finance', :to=>'teams#finance'
   get '/admin' => 'admin#index', :as => 'admin'
   put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
   devise_for :users
 
-  resources :match_events
-  resources :matches
-  resources :tactics
-  resources :stadia
-  resources :positions
-  resources :players
-  resources :teams
+  get '/players/:id' => 'players#show', :as => 'player'
+  get '/teams/:id' => 'teams#show', :as => 'team'
 
   namespace :admin do
     resources :double_yellow_card_descriptions

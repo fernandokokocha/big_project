@@ -36,6 +36,21 @@ RSpec.describe Player, :type => :model do
     expect(player.position_power).to eq(player.instinct + player.shots)
   end
 
+  it 'calculates salary' do
+    player = get_player
+    expect(player.salary).to eq(player.handling +
+                                 player.reflex +
+                                 player.discipline +
+                                 player.tackling +
+                                 player.work_rate +
+                                 player.positioning +
+                                 player.creativity +
+                                 player.technique +
+                                 player.instinct +
+                                 player.shots +
+                                 player.condition)
+  end
+
   def get_player
     Player.new(:first_name => 'First',
                :last_name => 'Last',
@@ -49,6 +64,7 @@ RSpec.describe Player, :type => :model do
                :technique => 8,
                :instinct => 9,
                :shots => 10,
+               :condition => 10,
                :birthdate => Date.today - 21.years)
   end
 end
