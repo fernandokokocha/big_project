@@ -1,35 +1,35 @@
-%p
-  =image_tag @team.logo_micro_path
-  %i.glyphicon.glyphicon-user
-  %b Players
-  %table.table.table-striped.table-bordered.table-hover.table-condensed
-    %tr
-      %th Name
-      %th Birthdate
-      %th Age
-      %th Position
-      %th Tactic
-      %th Salary
-      %th Goals
-      %th Assists
-      %th Yellow cards
-      %th Double yellow cards
-      %th Red cards
-      %th Injuries
+.page-header
+  %h1
+    %i.glyphicon.glyphicon-user
+    Players
+%table.table.table-striped.table-bordered.table-hover.table-condensed
+  %tr
+    %th Name
+    %th Birthdate
+    %th Age
+    %th Position
+    %th Tactic
+    %th Salary
+    %th Goals
+    %th Assists
+    %th Yellow cards
+    %th Double yellow cards
+    %th Red cards
+    %th Injuries
 
-    - @team.players.each do |player|
-      %tr
-        %td= link_to player.full_name, player
-        %td= player.birthdate
-        %td= player.current_age
-        %td= player.position.name
-        %td
-          -if @team.tactic.include? player
-            %i.glyphicon.glyphicon-ok
-        %td= player.salary
-        %td= MatchEvent.where(:event_type => "goal", :first_player => player).count
-        %td= MatchEvent.where(:event_type => "goal", :second_player => player).count
-        %td= MatchEvent.where(:event_type => "yellow card", :first_player => player).count
-        %td= MatchEvent.where(:event_type => "double yellow card", :first_player => player).count
-        %td= MatchEvent.where(:event_type => "red card", :first_player => player).count
-        %td= MatchEvent.where(:event_type => "injury", :first_player => player).count
+  - @team.players.each do |player|
+    %tr
+      %td= link_to player.full_name, player
+      %td= player.birthdate
+      %td= player.current_age
+      %td= player.position.name
+      %td
+        -if @team.tactic.include? player
+          %i.glyphicon.glyphicon-ok
+      %td= player.salary
+      %td= MatchEvent.where(:event_type => 'goal', :first_player => player).count
+      %td= MatchEvent.where(:event_type => 'goal', :second_player => player).count
+      %td= MatchEvent.where(:event_type => 'yellow card', :first_player => player).count
+      %td= MatchEvent.where(:event_type => 'double yellow card', :first_player => player).count
+      %td= MatchEvent.where(:event_type => 'red card', :first_player => player).count
+      %td= MatchEvent.where(:event_type => 'injury', :first_player => player).count

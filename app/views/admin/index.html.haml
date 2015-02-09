@@ -3,29 +3,33 @@
 
 .row
   .col-md-6
-    %h3 Events descriptions:
-    %ul.list-group
-      %li.list-group-item= link_to 'Goal', admin_goal_descriptions_path
-      %li.list-group-item= link_to 'Solo goal', admin_solo_goal_descriptions_path
-      %li.list-group-item= link_to 'Yellow card', admin_yellow_card_descriptions_path
-      %li.list-group-item= link_to 'Double yellow card', admin_double_yellow_card_descriptions_path
-      %li.list-group-item= link_to 'Red card', admin_red_card_descriptions_path
-      %li.list-group-item= link_to 'Injury', admin_injury_descriptions_path
+    .panel.panel-primary
+      .panel-heading
+        Event descriptions:
+      .list-group
+        = link_to 'Goal', admin_goal_descriptions_path, :class => 'list-group-item'
+        = link_to 'Solo goal', admin_solo_goal_descriptions_path, :class => 'list-group-item'
+        = link_to 'Yellow card', admin_yellow_card_descriptions_path, :class => 'list-group-item'
+        = link_to 'Double yellow card', admin_double_yellow_card_descriptions_path, :class => 'list-group-item'
+        = link_to 'Red card', admin_red_card_descriptions_path, :class => 'list-group-item'
+        = link_to 'Injury', admin_injury_descriptions_path, :class => 'list-group-item'
   .col-md-6
-    %h3 Users:
-    %table.table.table-striped.table-bordered.table-hover.table-condensed
-      %tr
-        %th User
-        %th Team
-        %th Admin
-        %th Grant admin
-      -@users.each do |user|
+    .panel.panel-primary
+      .panel-heading
+        Users:
+      %table.table.table-striped.table-bordered.table-hover.table-condensed
         %tr
-          %td= user
-          %td= link_to user.team.name, team_path(user.team)
-          %td
-            =user.admin?
-          %td
-            -unless user.admin?
-              =form_tag(admin_grant_path(user), method: :put) do
-                =submit_tag 'Grant admin', :class => 'btn btn-xs'
+          %th User
+          %th Team
+          %th Admin
+          %th Grant admin
+        -@users.each do |user|
+          %tr
+            %td= user
+            %td= link_to user.team.name, team_path(user.team)
+            %td
+              =user.admin?
+            %td
+              -unless user.admin?
+                =form_tag(admin_grant_path(user), method: :put) do
+                  =submit_tag 'Grant admin', :class => 'btn btn-xs'

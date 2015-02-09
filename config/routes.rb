@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/players', :to=>'teams#players'
   get '/tactic', :to=>'teams#tactic'
   patch '/tactic', :to=>'tactics#update'
+  patch '/new_logo', :to=>'teams#new_logo'
+  patch '/tactic', :to=>'tactics#update'
   get '/stadium', :to=>'teams#stadium'
   get '/finance', :to=>'teams#finance'
   get '/admin' => 'admin#index', :as => 'admin'

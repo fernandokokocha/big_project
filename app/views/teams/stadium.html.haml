@@ -1,9 +1,13 @@
-%p
-  =image_tag @team.logo_micro_path
-  %i.glyphicon.glyphicon-home
-  %b Stadium:
-  =@team.stadium.name
+.page-header
+  %h1
+    %i.glyphicon.glyphicon-home
+    =@team.stadium.name
+
+%h4
+  %i.glyphicon.glyphicon-th
   %b Capacity:
   =@team.stadium.capacity
+%h4
+  %i.glyphicon.glyphicon-eject
   %b Roof:
   =@team.stadium.roof

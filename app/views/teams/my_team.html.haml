@@ -1,23 +1,30 @@
 .row
-  .col-md-3
-    %p= image_tag @team.logo_path, :id => 'team-logo'
-  .col-md-9.page-header
-    %h1
-      = @team.name
-      .small= @team.user
-
-.row
-  .col-md-4
-    %p
+  .col-md-7
+    .page-header
+      %h1
+        = @team.name
+        .small= @team.user
+    %h4
       %i.glyphicon.glyphicon-usd
       %b Balance:
       = @team.balance
-  .col-md-4
-    %p
+    %h4
       %i.glyphicon.glyphicon-heart
       %b Reputation:
       = @team.reputation
-  .col-md-4
-    %p
+    %h4
       %i.glyphicon.glyphicon-home
+      %b Stadium:
       =link_to @team.stadium.name, @team.stadium
+
+  .col-md-5
+    .panel.panel-default
+      .panel-heading
+        Logo
+      .panel-body
+        %center
+          = image_tag @team.logo_path, :id => 'team-logo'
+          = form_for @team, :url => new_logo_path, :method => :patch, :html => {:class => 'form-inline'} do |f|
+            .form-group
+              = f.file_field :logo, :class => 'form-control'
+            = f.button 'Upload', :type => 'submit', :class => 'btn btn-default'
