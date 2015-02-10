@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/stadium', :to=>'teams#stadium'
   get '/finance', :to=>'teams#finance'
   get '/admin' => 'admin#index', :as => 'admin'
+  get '/leagues' => 'leagues#list'
   put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
   devise_for :users
 
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
     resources :injury_descriptions
     resources :goal_descriptions
     resources :solo_goal_descriptions
+    resources :leagues
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,33 @@
+%h1 Listing leagues
+
+%table.table.table-striped.table-bordered.table-hover.table-condensed
+  %tr
+    %th Name
+    %th Win points
+    %th Draw points
+    %th Win price
+    %th Draw price
+    %th Top scorer price
+    %th Best assistant price
+    %th
+    %th
+    %th
+
+  - @leagues.each do |league|
+    %tr
+      %td= league.name
+      %td= league.win_points
+      %td= league.draw_points
+      %td= league.win_price
+      %td= league.draw_price
+      %td= league.top_scorer_price
+      %td= league.best_assistant_price
+      %td= link_to 'Show', [:admin, league]
+      %td= link_to 'Edit', edit_admin_league_path(league)
+      %td= link_to 'Destroy', [:admin, league], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New League', new_admin_league_path
+%br
+= link_to 'Back to admin panel', admin_path

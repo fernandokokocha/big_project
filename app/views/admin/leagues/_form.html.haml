@@ -1,0 +1,31 @@
+= form_for [:admin, @league] do |f|
+  - if @league.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@league.errors.count, "error")} prohibited this league from being saved:"
+      %ul
+        - @league.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :win_points
+    = f.number_field :win_points
+  .field
+    = f.label :draw_points
+    = f.number_field :draw_points
+  .field
+    = f.label :win_price
+    = f.number_field :win_price
+  .field
+    = f.label :draw_price
+    = f.number_field :draw_price
+  .field
+    = f.label :top_scorer_price
+    = f.number_field :top_scorer_price
+  .field
+    = f.label :best_assistant_price
+    = f.number_field :best_assistant_price
+  .actions
+    = f.submit 'Save'

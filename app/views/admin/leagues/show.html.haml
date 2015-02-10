@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @league.name
+%p
+  %b Win points:
+  = @league.win_points
+%p
+  %b Draw points:
+  = @league.draw_points
+%p
+  %b Win price:
+  = @league.win_price
+%p
+  %b Draw price:
+  = @league.draw_price
+%p
+  %b Top scorer price:
+  = @league.top_scorer_price
+%p
+  %b Best assistant price:
+  = @league.best_assistant_price
+
+= link_to 'Edit', edit_admin_league_path(@league)
+\|
+= link_to 'Back', admin_leagues_path

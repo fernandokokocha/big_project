@@ -16,6 +16,11 @@
   .col-md-6
     .panel.panel-primary
       .panel-heading
+        Leagues:
+      .list-group
+        = link_to 'Click to manage', admin_leagues_path, :class => 'list-group-item'
+    .panel.panel-primary
+      .panel-heading
         Users:
       %table.table.table-striped.table-bordered.table-hover.table-condensed
         %tr
