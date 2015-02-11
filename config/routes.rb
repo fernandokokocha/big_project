@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/stadium', :to=>'teams#stadium'
   get '/finance', :to=>'teams#finance'
   get '/admin' => 'admin#index', :as => 'admin'
-  get '/leagues' => 'leagues#list'
+  get '/leagues' => 'leagues#list', :as => 'list_leagues'
   put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
   devise_for :users
 

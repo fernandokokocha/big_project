@@ -73,7 +73,6 @@ class SignupService
     end
     player.last_name = Faker::Name.last_name
     player.birthdate = Faker::Date.between(30.years.ago, 18.years.ago)
-    player.salary = 10000
     player.reflex = 100 + rand(1000)
     player.handling = 100 + rand(1000)
     player.discipline = 100 + rand(1000)

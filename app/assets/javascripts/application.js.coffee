@@ -10,3 +10,5 @@ $ ->
     $('#my-team-tab').addClass('active')
   if pathname == '/admin'
     $('#admin-tab').addClass('active')
+  if pathname == '/leagues'
+    $('#leagues-tab').addClass('active')

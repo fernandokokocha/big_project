@@ -63,6 +63,6 @@ class Admin::LeaguesController < ApplicationController
   end
 
   def league_params
-    params.require(:league).permit(:description)
+    params.require(:league).permit(:name, :win_points, :draw_points, :win_price, :draw_price, :top_scorer_price, :best_assistant_price)
   end
 end
