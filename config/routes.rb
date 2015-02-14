@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get '/admin' => 'admin#index', :as => 'admin'
   put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
+  put '/admin/next_round' => 'admin#next_round', :as =>'next_round'
 
   devise_for :users
 

@@ -22,4 +22,8 @@ class AdminController < ApplicationController
       end
     end
   end
+
+  def next_round
+    render admin_path
+  end
 end

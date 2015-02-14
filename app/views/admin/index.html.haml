@@ -16,6 +16,12 @@
   .col-md-6
     .panel.panel-primary
       .panel-heading
+        League:
+      .panel-body
+        =form_tag(next_round_path, method: :put) do
+          =submit_tag 'Generate next round', :class => 'btn btn-primary'
+    .panel.panel-primary
+      .panel-heading
         Users:
       %table.table.table-striped.table-bordered.table-hover.table-condensed
         %tr
@@ -32,4 +38,4 @@
             %td
               -unless user.admin?
                 =form_tag(admin_grant_path(user), method: :put) do
-                  =submit_tag 'Grant admin', :class => 'btn btn-xs'
+                  =submit_tag 'Grant admin', :class => 'btn btn-xs btn-success'

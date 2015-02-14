@@ -6,11 +6,11 @@ RSpec.describe Team, :type => :model do
   before (:each) do
     user = build(:user, :email => 'user@example.com')
 
-    @team = build(:team,
+    @team = create(:team,
                   :name => 'Team-name',
                   :user => user)
 
-    @rival = build(:team, :name => 'Rival')
+    @rival = create(:team, :name => 'Rival')
 
     create(:match, :home => @team, :away => @rival, :home_score => 2, :away_score => 1)
     create(:match, :home => @rival, :away => @team, :home_score => 4, :away_score => 1)
@@ -59,5 +59,4 @@ RSpec.describe Team, :type => :model do
   it 'calculates matches' do
     expect(@team.matches).to eq(4)
   end
-
 end

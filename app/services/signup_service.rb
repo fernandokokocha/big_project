@@ -3,9 +3,15 @@ class SignupService
     form_object.validate!
 
     ActiveRecord::Base.transaction do
-      user = User.create!(email: form_object.email,
+
+
+      user = User.new(email: form_object.email,
                           password: form_object.password,
                           password_confirmation: form_object.password_confirmation)
+      if User.count == 0
+        user.admin = true
+      end
+      user.save
 
       stadium = Stadium.create!(name: "#{form_object.team_name} Arena",
                                 capacity: 10000,

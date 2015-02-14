@@ -41,6 +41,6 @@ class TeamsController < ApplicationController
   end
 
   def league
-    @teams = Team.all
+    @teams = Team.all.sort {|a,b| a.points <=> b.points}
   end
 end
