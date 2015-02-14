@@ -12,7 +12,7 @@ class Player < ActiveRecord::Base
   end
   
   def salary
-    handling +
+    (handling +
         reflex +
         discipline +
         tackling +
@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
         technique +
         instinct +
         shots +
-        condition
+        condition).round(-2)
   end
 
   def gk_power
@@ -60,5 +60,29 @@ class Player < ActiveRecord::Base
       else
         'LOL'
     end
+  end
+
+  def goals
+    MatchEvent.where(:event_type => 'goal', :first_player => self).count
+  end
+
+  def assists
+    MatchEvent.where(:event_type => 'goal', :second_player => self).count
+  end
+
+  def injuries
+    MatchEvent.where(:event_type => 'injury', :first_player => self).count
+  end
+
+  def yellow_cards
+    MatchEvent.where(:event_type => 'yellow card', :first_player => self).count
+  end
+
+  def double_yellow_cards
+    MatchEvent.where(:event_type => 'double yellow card', :first_player => self).count
+  end
+
+  def red_cards
+    MatchEvent.where(:event_type => 'red card', :first_player => self).count
   end
 end

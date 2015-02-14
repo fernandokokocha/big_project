@@ -27,9 +27,9 @@
         -if @team.tactic.include? player
           %i.glyphicon.glyphicon-ok
       %td= player.salary
-      %td= MatchEvent.where(:event_type => 'goal', :first_player => player).count
-      %td= MatchEvent.where(:event_type => 'goal', :second_player => player).count
-      %td= MatchEvent.where(:event_type => 'yellow card', :first_player => player).count
-      %td= MatchEvent.where(:event_type => 'double yellow card', :first_player => player).count
-      %td= MatchEvent.where(:event_type => 'red card', :first_player => player).count
-      %td= MatchEvent.where(:event_type => 'injury', :first_player => player).count
+      %td= player.goals
+      %td= player.assists
+      %td= player.yellow_cards
+      %td= player.double_yellow_cards
+      %td= player.red_cards
+      %td= player.injuries

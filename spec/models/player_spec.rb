@@ -3,68 +3,77 @@ require 'rails_helper'
 RSpec.describe Player, :type => :model do
   include Helpers
 
+  before (:each) do
+    @player = build(:player)
+  end
+
   it 'puts full name properly' do
-    player = get_player
-    expect(player.full_name).to eq('First Last')
+    expect(@player.full_name).to eq('First Last')
   end
 
   it 'calculates current age' do
-    player = get_player
-    expect(player.current_age).to eq(21)
+    expect(@player.current_age).to eq(21)
   end
 
   it 'calculates positions powers' do
-    player = get_player
-    expect(player.gk_power).to eq(player.handling + player.reflex)
-    expect(player.d_power).to eq(player.discipline + player.tackling)
-    expect(player.dm_power).to eq(player.work_rate + player.positioning)
-    expect(player.am_power).to eq(player.creativity + player.technique)
-    expect(player.s_power).to eq(player.instinct + player.shots)
+    expect(@player.gk_power).to eq(@player.handling + @player.reflex)
+    expect(@player.d_power).to eq(@player.discipline + @player.tackling)
+    expect(@player.dm_power).to eq(@player.work_rate + @player.positioning)
+    expect(@player.am_power).to eq(@player.creativity + @player.technique)
+    expect(@player.s_power).to eq(@player.instinct + @player.shots)
   end
 
-  it 'choses proper position power' do
-    player = get_player
-    player.position = gk_position
-    expect(player.position_power).to eq(player.handling + player.reflex)
-    player.position = d_position
-    expect(player.position_power).to eq(player.discipline + player.tackling)
-    player.position = dm_position
-    expect(player.position_power).to eq(player.work_rate + player.positioning)
-    player.position = am_position
-    expect(player.position_power).to eq(player.creativity + player.technique)
-    player.position = s_position
-    expect(player.position_power).to eq(player.instinct + player.shots)
+  it 'chooses proper position power' do
+    @player.position = build(:position, :name => 'GK')
+    expect(@player.position_power).to eq(@player.handling + @player.reflex)
+    @player.position = build(:position, :name => 'D')
+    expect(@player.position_power).to eq(@player.discipline + @player.tackling)
+    @player.position = build(:position, :name => 'DM')
+    expect(@player.position_power).to eq(@player.work_rate + @player.positioning)
+    @player.position = build(:position, :name => 'AM')
+    expect(@player.position_power).to eq(@player.creativity + @player.technique)
+    @player.position = build(:position, :name => 'S')
+    expect(@player.position_power).to eq(@player.instinct + @player.shots)
   end
 
-  it 'calculates salary' do
-    player = get_player
-    expect(player.salary).to eq(player.handling +
-                                 player.reflex +
-                                 player.discipline +
-                                 player.tackling +
-                                 player.work_rate +
-                                 player.positioning +
-                                 player.creativity +
-                                 player.technique +
-                                 player.instinct +
-                                 player.shots +
-                                 player.condition)
+  it 'calculates rounded salary' do
+    expect(@player.salary).not_to eq(0)
+    expect(@player.salary % 100).to eq(0)
   end
 
-  def get_player
-    Player.new(:first_name => 'First',
-               :last_name => 'Last',
-               :handling => 1,
-               :reflex => 2,
-               :discipline => 3,
-               :tackling => 4,
-               :work_rate => 5,
-               :positioning => 6,
-               :creativity => 7,
-               :technique => 8,
-               :instinct => 9,
-               :shots => 10,
-               :condition => 10,
-               :birthdate => Date.today - 21.years)
+  it 'calculates goals' do
+    create(:match_event, :event_type => 'goal', :first_player => @player)
+    create(:match_event, :event_type => 'goal', :first_player => @player)
+    expect(@player.goals).to eq(2)
+  end
+
+  it 'calculates assists' do
+    create(:match_event, :event_type => 'goal', :second_player => @player)
+    create(:match_event, :event_type => 'goal', :second_player => @player)
+    expect(@player.assists).to eq(2)
+  end
+
+  it 'calculates injuries' do
+    create(:match_event, :event_type => 'injury', :first_player => @player)
+    create(:match_event, :event_type => 'injury', :first_player => @player)
+    create(:match_event, :event_type => 'injury', :first_player => @player)
+    expect(@player.injuries).to eq(3)
+
+  end
+
+  it 'calculates yellow cards' do
+    create(:match_event, :event_type => 'yellow card', :first_player => @player)
+    create(:match_event, :event_type => 'yellow card', :first_player => @player)
+    expect(@player.yellow_cards).to eq(2)
+  end
+
+  it 'calculates double yellow cards' do
+    create(:match_event, :event_type => 'double yellow card', :first_player => @player)
+    expect(@player.double_yellow_cards).to eq(1)
+  end
+
+  it 'calculates red cards' do
+    create(:match_event, :event_type => 'red card', :first_player => @player)
+    expect(@player.red_cards).to eq(1)
   end
 end
