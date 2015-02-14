@@ -39,4 +39,8 @@ class TeamsController < ApplicationController
     @team.update(params.require(:team).permit(:logo))
     redirect_to my_team_path
   end
+
+  def league
+    @teams = Team.all
+  end
 end

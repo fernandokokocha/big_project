@@ -33,4 +33,56 @@ class Team < ActiveRecord::Base
       logo.default_micro_url
     end
   end
+
+  def points
+    Match.where(:home_id => id).select {|match| match.home_win}.count * 3 +
+      Match.where(:home_id => id).select {|match| match.draw}.count +
+      Match.where(:away_id => id).select {|match| match.away_win}.count * 3 +
+      Match.where(:away_id => id).select {|match| match.draw}.count
+  end
+
+  def goals_for
+    result = 0
+    Match.where(:home_id => id).each do |match|
+      result += match.home_score
+    end
+    Match.where(:away_id => id).each do |match|
+      result += match.away_score
+    end
+    result
+  end
+
+  def goals_against
+    result = 0
+    Match.where(:home_id => id).each do |match|
+      result += match.away_score
+    end
+    Match.where(:away_id => id).each do |match|
+      result += match.home_score
+    end
+    result
+  end
+
+  def goals_diff
+    goals_for - goals_against
+  end
+
+  def wins
+    Match.where(:home_id => id).select {|match| match.home_win}.count +
+      Match.where(:away_id => id).select {|match| match.away_win}.count
+  end
+
+  def losts
+    Match.where(:home_id => id).select {|match| match.away_win}.count +
+      Match.where(:away_id => id).select {|match| match.home_win}.count
+  end
+
+  def draws
+    Match.where(:home_id => id).select {|match| match.draw}.count +
+      Match.where(:away_id => id).select {|match| match.draw}.count
+  end
+
+  def matches
+    Match.all.select {|match| match.participant? self}.count
+  end
 end

@@ -1,0 +1,30 @@
+.page-header
+  %h1
+    %i.glyphicon.glyphicon-repeat
+    League
+
+%table.table.table-striped.table-bordered.table-hover.table-condensed
+  %tr
+    %th Name
+    %th User
+    %th Matches
+    %th Wins
+    %th Draws
+    %th Losts
+    %th Goals for
+    %th Goals against
+    %th Goals diff
+    %th Points
+
+  - @teams.each do |team|
+    %tr
+      %td= link_to team.name, team
+      %td= team.user.email
+      %td= team.matches
+      %td= team.wins
+      %td= team.draws
+      %td= team.losts
+      %td= team.goals_for
+      %td= team.goals_against
+      %td= team.goals_diff
+      %td= team.points

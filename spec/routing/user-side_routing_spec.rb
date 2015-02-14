@@ -19,8 +19,8 @@ RSpec.describe 'User-side routing', :type => :routing do
     expect(:get => '/finance').to route_to('teams#finance')
   end
 
-  it 'routes to leagues#list' do
-    expect(:get => '/leagues').to route_to('leagues#list')
+  it 'routes to #league' do
+    expect(:get => '/league').to route_to('teams#league')
   end
 
   it 'routes to admin panel' do

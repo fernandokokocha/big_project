@@ -1,22 +1,24 @@
 Rails.application.routes.draw do
   root to: 'welcome#index'
-
   post '/signup', :to=>'welcome#create', :as=>'signups'
+
   get '/my_team', :to=>'teams#my_team'
-  get '/players', :to=>'teams#players'
-  get '/tactic', :to=>'teams#tactic'
-  patch '/tactic', :to=>'tactics#update'
   patch '/new_logo', :to=>'teams#new_logo'
+  get '/players', :to=>'teams#players'
+  get '/players/:id' => 'players#show', :as => 'player'
+  get '/tactic', :to=>'teams#tactic'
   patch '/tactic', :to=>'tactics#update'
   get '/stadium', :to=>'teams#stadium'
   get '/finance', :to=>'teams#finance'
-  get '/admin' => 'admin#index', :as => 'admin'
-  get '/leagues' => 'leagues#list', :as => 'list_leagues'
-  put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
-  devise_for :users
 
-  get '/players/:id' => 'players#show', :as => 'player'
+  get '/league' => 'teams#league', :as => 'league'
+
   get '/teams/:id' => 'teams#show', :as => 'team'
+
+  get '/admin' => 'admin#index', :as => 'admin'
+  put '/admin/grant/:id' => 'admin#grant', :as =>'admin_grant'
+
+  devise_for :users
 
   namespace :admin do
     resources :double_yellow_card_descriptions

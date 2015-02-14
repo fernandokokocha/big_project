@@ -11,4 +11,20 @@ class Match < ActiveRecord::Base
   def events
     match_events.order(:time)
   end
+
+  def home_win
+    home_score > away_score
+  end
+
+  def away_win
+    home_score < away_score
+  end
+
+  def draw
+    home_score == away_score
+  end
+
+  def participant? team
+    home == team or away == team
+  end
 end

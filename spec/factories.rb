@@ -1,13 +1,4 @@
-FactoryGirl.define do  factory :league do
-    name "MyString"
-win_points 1
-draw_points 1
-win_price 1
-draw_price 1
-top_scorer_price 1
-best_assistant_price 1
-  end
-
+FactoryGirl.define do
   sequence :email do |n|
     "email#{n}@factory.com"
   end
@@ -38,5 +29,12 @@ best_assistant_price 1
     stadium
     user
     tactic
+  end
+
+  factory :match do
+    association :home, factory: :team, name: 'Home Team'
+    association :away, factory: :team, name: 'Away Team'
+    home_score 0
+    away_score 0
   end
 end

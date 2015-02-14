@@ -1,4 +1,5 @@
 class TacticsController < ApplicationController
+  before_action :authenticate_user!
 
   def update
     @tactic = current_user.team.tactic
