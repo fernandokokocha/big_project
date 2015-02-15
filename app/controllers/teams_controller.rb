@@ -29,18 +29,14 @@ class TeamsController < ApplicationController
   end
 
   def new_logo
-    if params[:team].nil?
-      return redirect_to my_team_path, :notice => 'No image selected'
-    end
-    if params[:team][:logo].nil?
-      return redirect_to my_team_path, :notice => 'No image selected'
-    end
+    return redirect_to my_team_path, :notice => 'No image selected' if params[:team].nil?
+    return redirect_to my_team_path, :notice => 'No image selected' if params[:team][:logo].nil?
     @team = Team.find(current_user.team.id)
     @team.update(params.require(:team).permit(:logo))
     redirect_to my_team_path
   end
 
   def league
-    @teams = Team.all.sort {|a,b| a.points <=> b.points}
+    @teams = Team.all.sort {|a,b| a.points <=> b.points}.reverse!
   end
 end

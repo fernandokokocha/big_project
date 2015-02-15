@@ -30,6 +30,8 @@ class SignupService
       4.times {generate_s!}
 
       generate_initial_tactic!
+
+      true
     end
 
     form_object

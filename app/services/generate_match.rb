@@ -1,7 +1,5 @@
 class GenerateMatch
-  def call(form_object)
-    home = Team.find(form_object[:home_id])
-    away = Team.find(form_object[:away_id])
+  def call(home, away)
 
     ActiveRecord::Base.transaction do
       @match = Match.new
@@ -15,7 +13,7 @@ class GenerateMatch
       @match.save
     end
 
-    form_object
+    true
   end
 
 

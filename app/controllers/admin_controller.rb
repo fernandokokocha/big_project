@@ -18,12 +18,23 @@ class AdminController < ApplicationController
       if @user.save
         format.html { redirect_to admin_path, notice: "Admin rights granted to #{@user}." }
       else
-        format.html { render admin_path }
+        format.html { render 'index' }
       end
     end
   end
 
   def next_round
-    render admin_path
+    @users = User.all
+    respond_to do |format|
+      if next_round_service.call
+        format.html { redirect_to admin_path, notice: 'Next round generated.' }
+      else
+        format.html { render 'index' }
+      end
+    end
+  end
+
+  def next_round_service
+    @next_round_service ||= NextRoundService.new
   end
 end
