@@ -85,4 +85,11 @@ class Team < ActiveRecord::Base
   def matches
     Match.all.select {|match| match.participant? self}.count
   end
+
+  def last_matches
+    matches = Match.order('date DESC').select {|match| match.participant? self}
+    if matches.count > 5
+      matches.slice(0,5)
+    end
+  end
 end

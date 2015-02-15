@@ -39,4 +39,8 @@ class TeamsController < ApplicationController
   def league
     @teams = Team.all.sort {|a,b| a.points <=> b.points}.reverse!
   end
+
+  def matches
+    @matches = Match.order('date DESC').select {|match| match.participant? current_user.team}
+  end
 end

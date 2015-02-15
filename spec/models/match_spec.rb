@@ -7,12 +7,14 @@ RSpec.describe Match, :type => :model do
   end
 
   it 'prints nicely' do
-    match = Match.new(:date => Date.today,
-                      :home => @home,
-                      :away => @away,
-                      :home_score => 1,
-                      :away_score => 2)
+    match = build(:match,
+                  :date => Date.today,
+                  :home => @home,
+                  :away => @away,
+                  :home_score => 1,
+                  :away_score => 2)
     expect(match.to_s).to eq("#{Date.today}: Home Team 1-2 Away Team")
+    expect(match.bold_name @home).to eq("#{Date.today}: <b>Home Team</b> 1-2 Away Team")
   end
 
   it 'has match events ordered by time inc' do

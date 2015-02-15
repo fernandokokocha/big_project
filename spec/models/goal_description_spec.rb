@@ -8,12 +8,12 @@ RSpec.describe GoalDescription, :type => :model do
     expect(description).not_to be_valid
   end
 
-  it 'is invalid without capital X in description' do
+  it 'is invalid without capital Y in description' do
     description = GoalDescription.new(:description => alphabet_without_Y)
     expect(description).not_to be_valid
   end
 
-  it 'is valid enough if has capital X in description' do
+  it 'is valid enough if has capital X and Y in description' do
     description = GoalDescription.new(:description => 'Y X')
     expect(description).to be_valid
   end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   patch '/tactic', :to=>'tactics#update'
   get '/stadium', :to=>'teams#stadium'
   get '/finance', :to=>'teams#finance'
+  get '/matches', :to=>'teams#matches'
 
   get '/league' => 'teams#league', :as => 'league'
 

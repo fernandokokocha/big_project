@@ -12,11 +12,17 @@ RSpec.describe 'User-side routing', :type => :routing do
   it 'routes to #tactic' do
     expect(:get => '/tactic').to route_to('teams#tactic')
   end
+
   it 'routes to #stadium' do
     expect(:get => '/stadium').to route_to('teams#stadium')
   end
+
   it 'routes to #finance' do
     expect(:get => '/finance').to route_to('teams#finance')
+  end
+
+  it 'routes to #matches' do
+    expect(:get => '/matches').to route_to('teams#matches')
   end
 
   it 'routes to #league' do

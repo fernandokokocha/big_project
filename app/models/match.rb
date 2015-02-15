@@ -27,4 +27,9 @@ class Match < ActiveRecord::Base
   def participant? team
     home == team or away == team
   end
+
+  def bold_name team
+    name = to_s
+    name.sub(team.name, "<b>#{team.name}</b>").html_safe
+  end
 end

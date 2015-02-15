@@ -1,21 +1,35 @@
+.page-header
+  %h1
+    = @team.name
+    .small= @team.user
 .row
   .col-md-7
-    .page-header
-      %h1
-        = @team.name
-        .small= @team.user
-    %h4
-      %i.glyphicon.glyphicon-usd
-      %b Balance:
-      = @team.balance
-    %h4
-      %i.glyphicon.glyphicon-heart
-      %b Reputation:
-      = @team.reputation
-    %h4
-      %i.glyphicon.glyphicon-home
-      %b Stadium:
-      =link_to @team.stadium.name, @team.stadium
+    .panel.panel-primary
+      .panel-heading
+        Overview
+      .panel-body
+        %h4
+          %i.glyphicon.glyphicon-usd
+          %b Balance:
+          = @team.balance
+        %h4
+          %i.glyphicon.glyphicon-heart
+          %b Reputation:
+          = @team.reputation
+        %h4
+          %i.glyphicon.glyphicon-home
+          %b Stadium:
+          =link_to @team.stadium.name, @team.stadium
+    .panel.panel-primary
+      .panel-heading
+        Last matches
+        =surround '(', ')' do
+          =link_to 'See all', matches_path
+      -if @team.last_matches.any?
+        %table.table.table-striped.table-bordered.table-hover.table-condensed
+          - @team.last_matches.each do |match|
+            %tr
+              %td= match.bold_name @team
 
   .col-md-5
     .panel.panel-primary
