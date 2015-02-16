@@ -30,6 +30,7 @@
           - @team.last_matches.each do |match|
             %tr
               %td= match.bold_name @team
+              %td= link_to 'See more', show_match_path(match)
 
   .col-md-5
     .panel.panel-primary
