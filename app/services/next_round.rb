@@ -1,4 +1,4 @@
-class NextRoundService
+class NextRound
   def call
     ActiveRecord::Base.transaction do
       teams = Team.all.sort{|a,b| a.matches <=> b.matches}

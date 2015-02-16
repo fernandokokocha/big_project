@@ -35,6 +35,6 @@ class AdminController < ApplicationController
   end
 
   def next_round_service
-    @next_round_service ||= NextRoundService.new
+    @next_round_service ||= NextRound.new
   end
 end

@@ -5,7 +5,6 @@
 
 $ ->
   pathname = window.location.pathname
-  console.log(pathname)
   if pathname in ['/my_team', '/players', '/tactic', '/stadium', '/finance', '/matches']
     $('#my-team-tab').addClass('active')
   if pathname == '/admin'
