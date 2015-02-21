@@ -25,7 +25,7 @@
         Last matches
         =surround '(', ')' do
           =link_to 'See all', matches_path
-      -if @team.last_matches.any?
+      -if @team.last_matches
         %table.table.table-striped.table-bordered.table-hover.table-condensed
           - @team.last_matches.each do |match|
             %tr

@@ -57,7 +57,7 @@
 .panel.panel-primary
   .panel-heading
     Last matches
-  -if @team.last_matches.any?
+  -if @team.last_matches
     %table.table.table-striped.table-bordered.table-hover.table-condensed
       - @team.last_matches.each do |match|
         %tr

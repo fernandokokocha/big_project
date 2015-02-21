@@ -1,11 +1,9 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
 
-  respond_to :html
-
   def show
     @team = Team.find(params[:id])
-    respond_with(@team)
+    redirect_to my_team_path if @team == current_user.team
   end
 
   def my_team
