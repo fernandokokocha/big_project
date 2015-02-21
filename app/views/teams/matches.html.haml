@@ -2,7 +2,7 @@
   %h1
     %i.glyphicon.glyphicon-search
     Matches
-%table.table.table-striped.table-bordered.table-hover.table-condensed
+%table.table.table-bordered.table-condensed
   %tr
     %th Date
     %th Home
@@ -14,8 +14,14 @@
   - @matches.each do |match|
     %tr
       %td= match.date
-      %td= match.home
+      -if match.home == @team
+        %td.my-team= link_to match.home.name, match.home
+      -else
+        %td= link_to match.home.name, match.home
       %td= match.home_score
       %td= match.away_score
-      %td= match.away
+      -if match.away == @team
+        %td.my-team= link_to match.away.name, match.away
+      -else
+        %td= link_to match.away.name, match.away
       %td= link_to 'See more', show_match_path(match)

@@ -1,6 +1,5 @@
 class GenerateMatch
   def call(home, away)
-
     ActiveRecord::Base.transaction do
       @match = Match.new
       @match.home = home
@@ -86,13 +85,15 @@ class GenerateMatch
       r2 = rand(150000)
       if r1 < susceptibility
         if r2 < susceptibility
+          return if
+
           times = [rand(1..90), rand(1..90)]
 
           event = MatchEvent.new
           event.event_type = 'yellow card'
           event.match = @match
           event.time = times.min
-          desc = DoubleYellowCardDescription.order('RANDOM()').first
+          desc = YellowCardDescription.order('RANDOM()').first
           desc = desc.description
           desc = desc.sub('X', player.full_name)
           event.description = desc
@@ -219,8 +220,6 @@ class GenerateMatch
     event.first_player = shooter
     event.save
   end
-
-
 
   def goal?(shooter, goalkeeper)
     rand = rand(1000)

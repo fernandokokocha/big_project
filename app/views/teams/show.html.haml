@@ -6,18 +6,26 @@
       = @team.name
       .small= @team.user
 
-%p
-  %i.glyphicon.glyphicon-home
-  %b Stadium:
-  =@team.stadium.name
-  %b Capacity:
-  =@team.stadium.capacity
-  %b Roof:
-  =@team.stadium.roof
+.panel.panel-primary
+  .panel-heading
+    Overview
+  .panel-body
+    %h4
+      %i.glyphicon.glyphicon-usd
+      %b Balance:
+      = @team.balance
+    %h4
+      %i.glyphicon.glyphicon-heart
+      %b Reputation:
+      = @team.reputation
+    %h4
+      %i.glyphicon.glyphicon-home
+      %b Stadium:
+      =link_to @team.stadium.name, @team.stadium
 
-%p
-  %i.glyphicon.glyphicon-user
-  %b Players
+.panel.panel-primary
+  .panel-heading
+    Players
   %table.table.table-striped.table-bordered.table-hover.table-condensed
     %tr
       %th Name
@@ -45,3 +53,13 @@
         %td= MatchEvent.where(:event_type => "double yellow card", :first_player => player).count
         %td= MatchEvent.where(:event_type => "red card", :first_player => player).count
         %td= MatchEvent.where(:event_type => "injury", :first_player => player).count
+
+.panel.panel-primary
+  .panel-heading
+    Last matches
+  -if @team.last_matches.any?
+    %table.table.table-striped.table-bordered.table-hover.table-condensed
+      - @team.last_matches.each do |match|
+        %tr
+          %td= match.bold_name @team
+          %td= link_to 'See more', show_match_path(match)

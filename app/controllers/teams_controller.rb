@@ -41,6 +41,7 @@ class TeamsController < ApplicationController
   end
 
   def matches
+    @team = Team.find(current_user.team.id)
     @matches = Match.order('date DESC').select {|match| match.participant? current_user.team}
   end
 end
