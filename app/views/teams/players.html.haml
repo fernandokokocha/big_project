@@ -9,15 +9,12 @@
     %th Age
     %th Position
     %th Tactic
+    %th Pause
     %th Salary
-    %th Goals
-    %th Assists
-    %th Yellow cards
-    %th Double yellow cards
-    %th Red cards
-    %th Injuries
+    %th Goals/assists
+    %th Yellow/red cards
 
-  - @team.players.each do |player|
+  - @team.get_players.each do |player|
     %tr
       %td= link_to player.full_name, player
       %td= player.birthdate
@@ -26,10 +23,15 @@
       %td
         -if @team.tactic.include? player
           %i.glyphicon.glyphicon-ok
+      %td
+        -if player.pause
+          %i.glyphicon.glyphicon-ok
       %td= player.salary
-      %td= player.goals
-      %td= player.assists
-      %td= player.yellow_cards
-      %td= player.double_yellow_cards
-      %td= player.red_cards
-      %td= player.injuries
+      %td
+        = player.goals
+        |
+        = player.assists
+      %td
+        = player.yellow_cards
+        |
+        = player.red_cards

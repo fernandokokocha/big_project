@@ -89,7 +89,16 @@ class Team < ActiveRecord::Base
   def last_matches
     matches = Match.order('date DESC').select {|match| match.participant? self}
     if matches.count > 5
-      matches.slice(0,5)
+      matches = matches.slice(0,5)
     end
+    matches
+  end
+
+  def get_players
+    players.sort{|a,b| a.position.value <=> b.position.value}
+  end
+
+  def available_players
+    players.select{|player| not player.pause}
   end
 end

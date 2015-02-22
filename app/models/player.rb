@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
 
   def current_age
     now = Time.now.utc.to_date
-    now.year - birthdate.year - (birthdate.to_date.change(:year => now.year) > now ? 1 : 0)
+    now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
   end
   
   def salary
@@ -84,5 +84,9 @@ class Player < ActiveRecord::Base
 
   def red_cards
     MatchEvent.where(:event_type => 'red card', :first_player => self).count
+  end
+
+  def pause
+     injury_pause or cards_pause
   end
 end

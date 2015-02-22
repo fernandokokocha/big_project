@@ -1,6 +1,8 @@
 class GenerateMatch
   def call(home, away)
     ActiveRecord::Base.transaction do
+      clear_players_pause! home, away
+
       @match = Match.new
       @match.home = home
       @match.away = away
@@ -10,11 +12,12 @@ class GenerateMatch
       @match.away_score = 0
       generate_match_events!
       @match.save
+
+      update_database!
     end
 
     true
   end
-
 
   private
 
@@ -73,6 +76,9 @@ class GenerateMatch
         event.description = desc
         event.first_player = player
         event.save
+
+        player.injury_pause = true
+        player.save
       end
     end
   end
@@ -110,6 +116,9 @@ class GenerateMatch
           event.description = desc
           event.first_player = player
           event.save
+
+          player.cards_pause = true
+          player.save
         else
           event = MatchEvent.new
           event.event_type = 'yellow card'
@@ -133,6 +142,9 @@ class GenerateMatch
         event.description = desc
         event.first_player = player
         event.save
+
+        player.cards_pause = true
+        player.save
       end
     end
   end
@@ -140,13 +152,13 @@ class GenerateMatch
   def pick_assistant(team)
     r = rand(1..100)
     case r
-      when 1..10
+      when 1..15
         team.tactic.s1
-      when 11..20
+      when 16..30
         team.tactic.s2
-      when 21..45
+      when 31..50
         team.tactic.am1
-      when 46..70
+      when 51..70
         team.tactic.am2
       when 71..75
         team.tactic.dm1
@@ -223,7 +235,8 @@ class GenerateMatch
 
   def goal?(shooter, goalkeeper)
     rand = rand(1000)
-    (shooter.s_power * 2 - goalkeeper.gk_power) > rand
+    chance = [shooter.s_power * 2 - goalkeeper.gk_power, 10].max
+    chance > rand
   end
 
   def calculate_attendance
@@ -241,5 +254,37 @@ class GenerateMatch
     home_dp = @match.home.tactic.defensive_power
     away_op = @match.away.tactic.offensive_power
     (away_op - home_dp) / 1000
+  end
+
+  def update_database!
+    update_reputation!
+  end
+
+  def update_reputation!
+    if @match.home_win
+      @match.home.reputation += 5
+      @match.away.reputation = [@match.away.reputation-5, 0].max
+    elsif @match.away_win
+      @match.home.reputation = [@match.home.reputation-5, 0].max
+      @match.away.reputation += 5
+    else
+      @match.home.reputation += 2
+      @match.away.reputation += 2
+    end
+    @match.home.save
+    @match.away.save
+  end
+
+  def clear_players_pause! home, away
+    home.players.each do |player|
+      player.injury_pause = false
+      player.cards_pause = false
+      player.save
+    end
+    away.players.each do |player|
+      player.injury_pause = false
+      player.cards_pause = false
+      player.save
+    end
   end
 end

@@ -81,6 +81,11 @@ class SignupService
     end
     player.last_name = Faker::Name.last_name
     player.birthdate = Faker::Date.between(30.years.ago, 18.years.ago)
+    player.injury_pause = false
+    player.cards_pause = false
+    player.strength = 100
+    player.talent = rand(1..10)
+
     player.reflex = 100 + rand(1000)
     player.handling = 100 + rand(1000)
     player.discipline = 100 + rand(1000)
